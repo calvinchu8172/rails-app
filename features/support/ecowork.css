@@ -1,0 +1,12 @@
+
+.cucumber #cucumber-header, td #cucumber-header, th #cucumber-header { background: #4682B4 !important; height: 8.5em !important; }
+.cucumber h1, td h1, th h1 { font-size: 2.5em !important; }
+.cucumber #summary #totals, td #summary #totals, th #summary #totals { font-size: 1.5em !important; }
+.cucumber, td, th { font: bold 15px Verdana, Geneva, sans-serif !important; }
+.cucumber #summary p, td #summary p, th #summary p { margin: 5px 0 5px 2px !important; }
+.cucumber .scenario h3, td .scenario h3, th .scenario h3, .background h3 { font-size: 15px !important; padding: 10px !important; background: #008B8B !important; color: white; font-weight: normal !important; margin: 10px 0 0 0 !important; }
+.cucumber .scenario_file, td .scenario_file, th .scenario_file { color: #fff !important; padding: 10px !important; }
+.cucumber ol li.passed, td ol li.passed, th ol li.passed { background: #EDFFDA !important; color: #333 !important; }
+.cucumber .step_file, td .step_file, th .step_file { color: #333 !important; }
+.cucumber ol li.step, td ol li.step, th ol li.step { padding: 10px 10px 10px 18px !important; }
+.cucumber ol li.message, td ol li.message, th ol li.message { border-left: 5px solid #03ABAB !important; border-bottom: 1px solid #03ABAB !important; background: #E3FFFF !important; color: #333 !important; }

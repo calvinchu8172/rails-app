@@ -1,0 +1,24 @@
+---
+development:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  pool: 5
+  username:
+  password:
+  host:
+  database:
+test:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  pool: 5
+  username: root
+  password:
+  host: mysql
+  database: ppush-console_test
+production:
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
+  database: db/production.sqlite3

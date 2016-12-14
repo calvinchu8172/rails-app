@@ -1,0 +1,7 @@
+{
+  "ignoredDependencies": [
+    "jquery",
+    "bootstrap",
+    "underscore"
+  ]
+}

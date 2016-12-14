@@ -1,0 +1,63 @@
+/**
+ * Variables
+ */
+
+@import 'base/variables';
+
+/**
+ * Twitter bootstrap
+ */
+
+$icon-font-path: 'bootstrap-sass/assets/fonts/bootstrap/';
+@import 'bootstrap-sass/assets/stylesheets/bootstrap-sprockets';
+@import 'bootstrap-sass/assets/stylesheets/bootstrap';
+
+/**
+ * Fonts & Font icons
+ */
+
+@import 'font-awesome/scss/font-awesome';
+
+/**
+ * Mixins css:
+ */
+
+@import 'compass/css3/text-shadow';
+@import 'compass/css3/box-shadow';
+@import 'compass/css3/border-radius';
+@import 'compass/css3/transition';
+@import 'mixins/*';
+
+/**
+ * Plugins css:
+ */
+
+@import 'select2/dist/css/select2';
+@import 'select2-bootstrap-theme/dist/select2-bootstrap';
+@import 'flag-icon-css/css/flag-icon.min';
+// @import 'plugins/*';
+
+/**
+ * Layout & Main
+ */
+
+@import 'base/layout';
+@import 'base/main';
+
+/**
+ * Generic css:
+ */
+
+// @import 'generic/*';
+
+/**
+ * Page specific styles:
+ */
+
+// @import 'pages/*';
+
+/**
+ * Override css:
+ */
+
+@import 'base/override';
