@@ -1,0 +1,8 @@
+- content_for :title, I18n.t('devise.titles.reset_password')
+
+= simple_form_for resource, as: resource_name, url: password_url(resource_name), method: :put do |f|
+  = f.hidden_field :reset_password_token
+  = f.input :password, label: false, placeholder: User.human_attribute_name(:password), input_html: { autocomplete: 'off' }, required: true
+  = f.input :password_confirmation, label: false, placeholder: User.human_attribute_name(:password_confirmation), input_html: { autocomplete: 'off' }, required: true
+  .form-group
+    = f.button :submit, I18n.t('common.labels.submit'), class: 'btn-block'

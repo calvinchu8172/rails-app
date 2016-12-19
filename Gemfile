@@ -112,6 +112,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'nokogiri'
 gem 'rest-client'
 gem 'actionview-encoded_mail_to'
+gem 'devise', '4.2.0'
+gem 'devise-i18n', '1.1.1'
 
 # ------ #
 # - UI - #

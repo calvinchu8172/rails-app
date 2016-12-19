@@ -1,0 +1,64 @@
+---
+zh-TW:
+  common:
+    labels:
+      activate: 啟用
+      back: 返回
+      cancel: 取消
+      confirm: 確認
+      delete: 刪除
+      download: 下載
+      edit: 編輯
+      import: 匯入
+      link: 連結
+      more: 更多
+      new: 新增
+      reset: 重設
+      revoke: 註銷
+      search: 搜尋
+      submit: 提交
+      ok: 好
+      details: 詳細
+      subscribe: 訂閱
+      subscribed: 已訂閱
+      add: 加入
+      generate: 產生
+      close: 關閉
+      next: 下一步
+      abort: 略過
+      created_at: 建立日期
+      creator: 建立者
+      updated_at: 更新日期
+      revoked_at: 註銷日期
+      revoker: 註銷者
+      status: 狀態
+      remark: 備註
+      date: 日期
+      error_message: 錯誤訊息
+      search: 搜尋
+      system_message: 系統訊息
+      loading: 載入中...
+      upload: 上傳
+      select_all: 全選
+      clear: 清空
+      all: 全部
+      done: 完成
+      description: 描述
+    confirms:
+      activate: 您確定要啟用？
+      delete: 您確定要刪除？
+      revoke: 您確定要註銷？
+    messages:
+      error: 發生錯誤，請聯絡管理員。
+      no_record_found: 找不到記錄
+      import_empty_csv: 匯入空白檔案
+      unauthorized: 您無權存取此頁面。
+      no_data_available: 目前無任何資料
+      no_data_matching: 無任何符合資料
+      please_wait: 請稍候...
+      not_found: 找不到
+      check_one_at_least: 請至少選擇一列。
+      confirm: 您確定要執行？
+    placeholders:
+      select_options: 請選擇
+      select_one_option: 請選擇一個選項

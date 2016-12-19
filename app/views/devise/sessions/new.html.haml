@@ -1,0 +1,18 @@
+- content_for :title, I18n.t('devise.titles.sign_in')
+
+= simple_form_for resource, as: resource_name, url: session_url(resource_name), method: :post do |f|
+  = f.input :email, label: false, placeholder: User.human_attribute_name(:email), autofocus: true, required: true
+  = f.input :password, label: false, placeholder: User.human_attribute_name(:password), input_html: { autocomplete: 'off' }, required: true
+  .form-group.remember_me
+    .checkbox
+      = label_tag :remember_me do
+        = check_box_tag :remember_me, '1', params[:remember_me]
+        = User.human_attribute_name(:remember_me)
+  .form-group
+    = f.button :submit, I18n.t('common.labels.submit'), class: 'btn-block'
+  %br
+  .separator
+    .links
+      - unless User.super_admins.first.try(:confirmed?)
+        = link_to I18n.t('devise.labels.resend_confirmation_email'), super_admin_confirmation_resend_url
+      = link_to I18n.t('devise.labels.forgot_password'), new_password_url(resource_name)

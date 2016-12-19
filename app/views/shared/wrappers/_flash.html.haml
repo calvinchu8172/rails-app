@@ -1,0 +1,26 @@
+- if flash.present?
+  .flash-wrapper
+    - if flash[:alert]
+      .alert.alert-warning
+        = simple_format "#{fa_icon('exclamation-triangle')} #{flash[:alert]}"
+    - if flash[:error]
+      .alert.alert-danger
+        = simple_format "#{fa_icon('times-circle')} #{flash[:error]}"
+    - if flash[:success]
+      .alert.alert-success
+        = simple_format "#{fa_icon('check-circle')} #{flash[:success]}"
+    - if flash[:notice]
+      .alert.alert-info
+        = simple_format "#{fa_icon('info-circle')} #{flash[:notice]}"
+    - if content_for? :alert_flash
+      .alert.alert-warning
+        = simple_format "#{fa_icon('exclamation-triangle')} #{yield(:alert_flash)}"
+    - if content_for? :error_flash
+      .alert.alert-danger
+        = simple_format "#{fa_icon('times-circle')} #{yield(:error_flash)}"
+    - if content_for? :success_flash
+      .alert.alert-success
+        = simple_format "#{fa_icon('check-circle')} #{yield(:success_flash)}"
+    - if content_for? :notice_flash
+      .alert.alert-info
+        = simple_format "#{fa_icon('info-circle')} #{yield(:notice_flash)}"

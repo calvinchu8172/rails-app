@@ -1,0 +1,7 @@
+- content_for :title, I18n.t('devise.titles.forgot_password')
+
+= simple_form_for resource, as: resource_name, url: password_url(resource_name), method: :post do |f|
+  = f.input :email, label: false, placeholder: User.human_attribute_name(:email), autofocus: true, required: true
+  .form-group
+    = button_tag I18n.t('common.labels.submit'), type: 'submit', class: 'btn btn-default btn-block'
+    = link_to I18n.t('common.labels.cancel'), new_session_url(resource_name), class: 'btn btn-default btn-block'

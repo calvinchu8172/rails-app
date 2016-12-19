@@ -1,0 +1,46 @@
+body.devise {
+  background: #F7F7F7;
+
+  .devise-wrapper {
+    margin: 0px auto;
+    margin-top: 8%;
+    max-width: 350px;
+    position: relative;
+
+    h1 {
+      font: normal 25px Helvetica, Arial, sans-serif;
+      letter-spacing: -0.05em;
+      line-height: 20px;
+      margin: 10px 0 30px;
+      text-align: center;
+
+      &:before, &:after {
+        content: "";
+        height: 1px;
+        position: absolute;
+        top: 10px;
+        width: 20%;
+      }
+
+      &:before {
+        background: #7e7e7e;
+        background: linear-gradient(right, #7e7e7e 0%, white 100%);
+        left: 0;
+      }
+
+      &:after {
+        background: #7e7e7e;
+        background: linear-gradient(left, #7e7e7e 0%, white 100%);
+        right: 0;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .links {
+      text-align: right;
+    }
+  }
+}

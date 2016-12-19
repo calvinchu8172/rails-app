@@ -64,7 +64,4 @@ Rails.application.configure do
 
   # Set the logging destination(s)
   config.log_to = %w[stdout file]
-
-  # use letter_opener preview sent email
-  config.action_mailer.delivery_method = :letter_opener
 end
