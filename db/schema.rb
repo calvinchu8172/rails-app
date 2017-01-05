@@ -13,14 +13,14 @@
 ActiveRecord::Schema.define(version: 20161215180455) do
 
   create_table "logs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "source_type",                    null: false
-    t.integer  "source_id",                      null: false
+    t.string   "source_type",               null: false
+    t.integer  "source_id",                 null: false
     t.string   "target_type"
     t.integer  "target_id"
-    t.string   "event",                          null: false
-    t.text     "extra",       limit: 4294967295
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.string   "event",                     null: false
+    t.text     "extra",       limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.index ["created_at"], name: "index_logs_on_created_at", using: :btree
     t.index ["event"], name: "index_logs_on_event", using: :btree
     t.index ["source_type", "source_id"], name: "index_logs_on_source_type_and_source_id", using: :btree

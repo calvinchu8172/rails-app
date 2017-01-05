@@ -2,8 +2,6 @@ class SuperAdmin::RegistrationsController < Devise::RegistrationsController
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  layout 'gentelella/devise'
-
   def new
     # 當已經有超級管理員時，則跳回首頁
     redirect_to root_url and return if User.super_admins.present?

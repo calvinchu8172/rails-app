@@ -1,7 +1,5 @@
 class Users::SessionsController < Devise::SessionsController
 
-  layout 'gentelella/devise'
-
   def new
     # # 當無任何超級管理員時，則跳轉到超級管理員註冊頁面
     redirect_to super_admin_sign_up_url and return if User.super_admins.blank?

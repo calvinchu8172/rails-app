@@ -11,7 +11,5 @@
 
 #= require plugins/time_zone
 
-#= require gentelella/build/js/custom
-
 #= require util
 #= require common

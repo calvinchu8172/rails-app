@@ -19,18 +19,9 @@ class Log < ActiveRecord::Base
     where(arel_table[:created_at].lteq(until_time))
   }
 
-  # 寫入 Log
-  def self.write(source, targets, event, extras = nil)
-    source_id   = source.respond_to?('id') ? source.id : source
-    source_type = source.class.base_class.to_s rescue nil
-    targets     = targets.is_a?(Array) ? targets : [targets]
-    extras      = extras.is_a?(Array) ? extras : [extras]
-
-    # column 中的每個 element 代表 Hash 中的 Key
-    column = [:source_id, :source_type, :target_id, :target_type, :event, :extra]
-    values = targets.map.with_index do |target, i|
-      [source_id, source_type, target.id, target.class.base_class.to_s, event, extras[i]]
+  class << self
+    def write(source, target, event, extra = nil)
+      create(source: source, target: target, event: event, extra: extra)
     end
-    Log.import column, values, validate: false
   end
 end

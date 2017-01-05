@@ -3,10 +3,10 @@
   %head
     %meta{ charset: 'UTF-8' }
     %meta{ 'http-equiv' => 'X-UA-Compatible', content: 'IE=edge' }
-    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' }
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1' }
     %meta{ name: 'apple-mobile-web-app-capable', content: 'yes' }
     %meta{ name: 'apple-mobile-web-app-status-bar-style', content: 'black' }
-    %title PpushConsole
+    %title PrivatePush Console
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
@@ -20,5 +20,15 @@
     = render 'shared/bootlint' if Rails.env.development?
 
   %body{ body_attributes }
-    = yield
+    - if user_signed_in?
+      = render 'shared/wrappers/flash'
+      = yield
+    - else
+      .container-fluid
+        .col-sm-4.col-sm-offset-4
+          .page-header
+            %h4
+              = yield :title
+          = render 'shared/wrappers/flash'
+          = yield
     = yield :body_js

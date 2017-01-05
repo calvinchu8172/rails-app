@@ -38,12 +38,6 @@ $icon-font-path: 'bootstrap-sass/assets/fonts/bootstrap/';
 // @import 'plugins/*';
 
 /**
- * Templates
- */
-
-@import 'gentelella/build/css/custom';
-
-/**
  * Layout & Main
  */
 
@@ -60,7 +54,7 @@ $icon-font-path: 'bootstrap-sass/assets/fonts/bootstrap/';
  * Page specific styles:
  */
 
-@import 'pages/*';
+// @import 'pages/*';
 
 /**
  * Override css:

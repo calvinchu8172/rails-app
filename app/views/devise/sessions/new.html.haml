@@ -9,10 +9,7 @@
         = check_box_tag :remember_me, '1', params[:remember_me]
         = User.human_attribute_name(:remember_me)
   .form-group
-    = f.button :submit, I18n.t('common.labels.submit'), class: 'btn-block'
-  %br
-  .separator
-    .links
-      - unless User.super_admins.first.try(:confirmed?)
-        = link_to I18n.t('devise.labels.resend_confirmation_email'), super_admin_confirmation_resend_url
-      = link_to I18n.t('devise.labels.forgot_password'), new_password_url(resource_name)
+    = f.button :submit, I18n.t('common.labels.submit')
+  - unless User.super_admins.first.try(:confirmed?)
+    = link_to I18n.t('devise.labels.resend_confirmation_email'), super_admin_confirmation_resend_url
+  = link_to I18n.t('devise.labels.forgot_password'), new_password_url(resource_name)

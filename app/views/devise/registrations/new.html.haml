@@ -5,4 +5,4 @@
   = f.input :password, label: false, placeholder: User.human_attribute_name(:password), input_html: { autocomplete: 'off' }, required: true
   = f.input :password_confirmation, label: false, placeholder: User.human_attribute_name(:password_confirmation), input_html: { autocomplete: 'off' }, required: true
   .form-group
-    = f.button :submit, I18n.t('common.labels.submit'), class: 'btn-block'
+    = f.button :submit, I18n.t('common.labels.submit')
