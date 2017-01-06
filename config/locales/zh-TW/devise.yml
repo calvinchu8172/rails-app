@@ -1,19 +1,19 @@
 zh-TW:
   devise:
     titles:
-      sign_in: '登入'
-      sign_up: '註冊'
-      forgot_password: '忘記密碼'
-      reset_password: '重設密碼'
-      change_password: '變更密碼'
-      resend_confirmation_email: '重發認證信'
+      sign_in: 登入
+      sign_up: 註冊
+      forgot_password: 忘記密碼
+      reset_password: 重設密碼
+      change_password: 變更密碼
+      resend_confirmation_email: 重發認證信
     labels:
-      sign_in: '登入'
-      sign_out: '登出'
-      sign_up: '註冊'
-      forgot_password: '忘記密碼？'
-      resend_confirmation_email: '重發認證信'
-      change_password: '變更密碼'
+      sign_in: 登入
+      sign_out: 登出
+      sign_up: 註冊
+      forgot_password: 忘記密碼？
+      resend_confirmation_email: 重發認證信
+      change_password: 變更密碼
     failure:
-      locked: '帳號已被鎖定或停用，請逕洽超級管理員協助處理。'
-      unauthenticated: '您需要先登入後才能繼續。'
+      locked: 帳號已被鎖定或停用，請逕洽超級管理員協助處理。
+      unauthenticated: 您需要先登入後才能繼續。

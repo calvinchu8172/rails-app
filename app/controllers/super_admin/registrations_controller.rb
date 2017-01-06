@@ -19,7 +19,7 @@ class SuperAdmin::RegistrationsController < Devise::RegistrationsController
       # 紀錄管理員註冊事件
       Log.write(resource, resource, 'super_admin_signed_up')
       expire_data_after_sign_in!
-      flash[:notice] = I18n.t('user.messages.super_admin_sign_up_success', email: resource.email)
+      flash[:notice] = t('user.messages.super_admin_sign_up_success', email: resource.email)
       redirect_to new_user_session_url
     else
       clean_up_passwords resource

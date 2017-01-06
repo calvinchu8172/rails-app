@@ -2,41 +2,41 @@ zh-TW:
   activerecord:
     attributes:
       user:
-        email: '信箱'
-        password: '密碼'
-        password_confirmation: '密碼確認'
-        current_password: '目前密碼'
-        remember_me: '保持登入狀態'
-        remember_created_at: '保持登入狀態開始時間'
-        sign_in_count: '登入次數'
-        current_sign_in_at: '登入時間'
-        last_sign_in_at: '上次登入時間'
-        current_sign_in_ip: '登入IP'
-        last_sign_in_ip: '上次登入IP'
-        created_at: '建立時間'
-        updated_at: '更新時間'
-        is_invited: '被邀請'
-        invitation_created_at: '被邀請時間'
-        is_accepted: '接受邀請'
-        invitation_accepted_at: '接受邀請時間'
-        is_locked: '被鎖定'
-        locked_at: '被鎖定時間'
+        email: 信箱
+        password: 密碼
+        password_confirmation: 密碼確認
+        current_password: 目前密碼
+        remember_me: 保持登入狀態
+        remember_created_at: 保持登入狀態開始時間
+        sign_in_count: 登入次數
+        current_sign_in_at: 登入時間
+        last_sign_in_at: 上次登入時間
+        current_sign_in_ip: 登入IP
+        last_sign_in_ip: 上次登入IP
+        created_at: 建立時間
+        updated_at: 更新時間
+        is_invited: 被邀請
+        invitation_created_at: 被邀請時間
+        is_accepted: 接受邀請
+        invitation_accepted_at: 接受邀請時間
+        is_locked: 被鎖定
+        locked_at: 被鎖定時間
   help:
     user:
-      change_password: '需要您目前密碼來完成變更'
+      change_password: 需要您目前密碼來完成變更
   user:
     labels:
-      management: '會員管理'
-      edit_profile: '修改個人檔案'
-      resent_invitation: '重寄邀請信'
-      invite_user: '邀請會員'
+      management: 會員管理
+      edit_profile: 修改個人檔案
+      resent_invitation: 重寄邀請信
+      invite_user: 邀請會員
     titles:
-      super_admin_sign_up: '註冊超級管理員'
-      index: '會員列表'
-      show: '會員資訊'
+      super_admin_sign_up: 註冊超級管理員
+      index: 會員列表
+      show: 會員資訊
     messages:
-      super_admin_sign_up_success: '超級管理員註冊成功，請先前往 %{email} 信箱完成驗證手續。'
-      resent_invitation_success: '已成功重新寄送邀請信件給 %{email}。'
-      lock_success: '已成功鎖定會員 %{email}。'
-      unlock_success: '已成功解鎖會員 %{email}。'
-      edit_success: '已成功編輯會員 %{email}。'
+      super_admin_sign_up_success: 超級管理員註冊成功，請先前往 %{email} 信箱完成驗證手續。
+      resent_invitation_success: 已成功重新寄送邀請信件給 %{email}。
+      lock_success: 已成功鎖定會員 %{email}。
+      unlock_success: 已成功解鎖會員 %{email}。
+      edit_success: 已成功編輯會員 %{email}。

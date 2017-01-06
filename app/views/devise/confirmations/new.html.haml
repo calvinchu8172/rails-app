@@ -1,7 +1,7 @@
-- content_for :title, I18n.t('devise.titles.resend_confirmation_email')
+- content_for :title, t('devise.titles.resend_confirmation_email')
 
 = simple_form_for resource, as: resource_name, url: super_admin_confirmation_url do |f|
   = f.input :email, label: false, placeholder: User.human_attribute_name(:email), autofocus: true, required: true
   .form-group
-    = f.button :submit, I18n.t('common.labels.submit')
-    = link_to I18n.t('common.labels.cancel'), new_session_url(resource_name), class: 'btn btn-default'
+    = f.button :submit, t('common.labels.submit')
+    = link_to t('common.labels.cancel'), new_session_url(resource_name), class: 'btn btn-default'
