@@ -1,0 +1,23 @@
+zh-TW:
+  devise:
+    failure:
+      invited: 你已經被邀請加入本站，請檢查信件並接受邀請完成新增帳號。
+    invitations:
+      send_instructions: 已寄送邀請信件給 %{email}。
+      invitation_token_invalid: 非有效的邀請辨識金鑰
+      updated: 你已經成功設置密碼及登入本站。
+      updated_not_active: 密碼已經設置成功。
+      no_invitations_remaining: 目前沒有邀請。
+      invitation_removed: 你的邀請已經被移除。
+      new:
+        header: 寄送邀請
+      edit:
+        header: 設置密碼
+    mailer:
+      invitation_instructions:
+        subject: 邀請說明
+        hello: "%{email} 您好~"
+        someone_invited_you: 有人邀請你加入網站 %{url}，你可以透過以下連結接受邀請：
+        accept: 接受邀請
+        accept_until: 此邀請將於 %{due_date} 到期。
+        ignore: 如果你不想接受此邀請，請忽略此信件。<br>在你接受邀請並透過上述連結設定你的密碼前，你的帳號並不會被建立。

@@ -1,7 +1,5 @@
 class SuperAdmin::RegistrationsController < Devise::RegistrationsController
 
-  before_action :configure_permitted_parameters, if: :devise_controller?
-
   def new
     # 當已經有超級管理員時，則跳回首頁
     redirect_to root_url and return if User.super_admins.present?
@@ -27,23 +25,4 @@ class SuperAdmin::RegistrationsController < Devise::RegistrationsController
       respond_with resource
     end
   end
-
-  def edit
-    resource.build_profile if resource.profile.nil?
-  end
-
-  def update
-    super do |resource|
-      # 紀錄使用者修改密碼事件
-      Log.write(resource, resource, 'changed_password') if resource.errors.empty?
-    end
-  end
-
-  protected
-
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:account_update, keys: [
-        { profile_attributes: [:id, :name] }
-      ])
-    end
 end

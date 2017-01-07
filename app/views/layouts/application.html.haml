@@ -8,8 +8,8 @@
     %meta{ name: 'apple-mobile-web-app-status-bar-style', content: 'black' }
     %title PrivatePush Console
     = csrf_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
     / HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
     / WARNING: Respond.js doesn't work if you view the page via file://
     / [if lt IE 9]
@@ -21,14 +21,25 @@
 
   %body{ body_attributes }
     - if user_signed_in?
-      = render 'shared/wrappers/flash'
-      = yield
+      .container.body
+        .main_container
+          .col-md-3.left_col
+            .left_col.scroll-view
+              = render 'shared/components/nav_title'
+              = render 'shared/components/sidebar_menu'
+          = render 'shared/components/top_nav'
+          .right_col{ role: 'main' }
+            %div
+              = render 'shared/components/page_title'
+              = render 'shared/wrappers/flash'
+              = yield
+          = render 'shared/components/footer'
     - else
       .container-fluid
-        .col-sm-4.col-sm-offset-4
-          .page-header
-            %h4
-              = yield :title
+        .devise-wrapper
+          %h1= yield :title
           = render 'shared/wrappers/flash'
           = yield
+
+    = javascript_include_tag 'themes/gentelella'
     = yield :body_js

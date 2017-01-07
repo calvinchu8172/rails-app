@@ -1,10 +1,10 @@
 #= require jquery2
 #= require jquery_ujs
-#= require turbolinks
 #= require js-cookie/src/js.cookie
 #= require moment/min/moment.min
 #= require moment-timezone/builds/moment-timezone-with-data.min
 
+#= require bootstrap-sass/assets/javascripts/bootstrap/dropdown
 #= require bootstrap-sass/assets/javascripts/bootstrap/modal
 #= require bootstrap-sass/assets/javascripts/bootstrap/tooltip
 #= require bootstrap-sass/assets/javascripts/bootstrap/popover

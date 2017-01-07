@@ -1,0 +1,11 @@
+zh-TW:
+  activerecord:
+    attributes:
+      profile:
+        name: 暱稱
+        role: 權限
+  profile:
+    roles:
+      super_admin: 超級管理員
+      admin: 管理員
+      manager: 經理

@@ -18,6 +18,23 @@ Rails.application.routes.draw do
     get  'super_admin/confirmation/resend', to: 'super_admin/confirmations#new'
     get  'super_admin/confirmation',        to: 'super_admin/confirmations#show'
     post 'super_admin/confirmation',        to: 'super_admin/confirmations#create'
+    # 變更密碼
+    get  'admin/users/edit', to: 'users/registrations#edit',   as: 'edit_user_registration'
+    put  'admin/users/edit', to: 'users/registrations#update', as: 'user_registration'
+    # 邀請會員
+    get  'admin/users/invitation/new', to: 'users/invitations#new'
+    post 'admin/users/invitation',     to: 'users/invitations#create'
   end
 
+  namespace :admin do
+    resources :users, only: [:index, :show, :edit, :update] do
+      member do
+        # 重寄邀請信
+        get    'invitation/resent', to: 'users#resent_invitation'
+        # 鎖定與解鎖帳號
+        delete 'lock',              to: 'users#lock'
+        put    'unlock',            to: 'users#unlock'
+      end
+    end
+  end
 end

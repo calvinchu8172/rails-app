@@ -1,0 +1,28 @@
+- content_for :title, t('devise.titles.change_password')
+
+.row
+  .col-md-12.col-sm-12.col-xs-12
+    .x_panel
+      .x_content
+        = simple_form_for resource, as: resource_name, url: registration_url(resource_name), method: :put, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f|
+          = f.input :email, input_wrapper_html: { class: 'col-sm-9' } do
+            %p.form-control-static
+              = resource.email
+          = f.fields_for :profile, wrapper: :horizontal_form do |p|
+            = p.input :name, wrapper_html: { class: 'has-feedback' }, input_wrapper_html: { class: 'col-sm-4' } do
+              = p.input_field :name, autofocus: true, class: 'form-control has-feedback-left'
+              %span.fa.fa-id-card-o.form-control-feedback.left
+          = f.input :password, wrapper_html: { class: 'has-feedback' }, input_wrapper_html: { class: 'col-sm-4' } do
+            = f.input_field :password, autocomplete: 'off', class: 'form-control has-feedback-left'
+            %span.fa.fa-key.form-control-feedback.left
+          = f.input :password_confirmation, wrapper_html: { class: 'has-feedback' }, input_wrapper_html: { class: 'col-sm-4' } do
+            = f.input_field :password_confirmation, autocomplete: 'off', class: 'form-control has-feedback-left'
+            %span.fa.fa-key.form-control-feedback.left
+          = f.input :current_password, wrapper_html: { class: 'has-feedback' }, input_wrapper_html: { class: 'col-sm-4' }, required: true, hint: t('help.user.change_password') do
+            = f.input_field :current_password, autocomplete: 'off', class: 'form-control has-feedback-left'
+            %span.fa.fa-key.form-control-feedback.left
+          .ln_solid
+          .form-group
+            .col-sm-6.col-xs-12.col-md-offset-3
+              = f.button :submit, t('common.labels.submit'), class: 'btn-success'
+              = link_to t('common.labels.cancel'), root_url, class: 'btn btn-default'

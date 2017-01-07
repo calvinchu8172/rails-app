@@ -1,7 +1,12 @@
 - content_for :title, t('devise.titles.forgot_password')
 
 = simple_form_for resource, as: resource_name, url: password_url(resource_name), method: :post do |f|
-  = f.input :email, label: false, placeholder: User.human_attribute_name(:email), autofocus: true, required: true
+  = f.input :email, label: false, wrapper_html: { class: 'has-feedback' } do
+    = f.input_field :email, placeholder: User.human_attribute_name(:email), autofocus: true, class: 'form-control has-feedback-left'
+    %span.fa.fa-envelope-o.form-control-feedback.left
   .form-group
-    = f.button :submit, t('common.labels.submit')
-    = link_to t('common.labels.cancel'), new_session_url(resource_name), class: 'btn btn-default'
+    .row
+      .col-sm-6.col-xs-12
+        = f.button :submit, t('common.labels.submit'), class: 'btn-block btn-success'
+      .col-sm-6.col-xs-12
+        = link_to t('common.labels.cancel'), new_session_url(resource_name), class: 'btn btn-default btn-block'

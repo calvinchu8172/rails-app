@@ -15,6 +15,10 @@ module UserProfileable
       self.create_profile unless self.profile
       self.profile.super_admin!
     end
+
+    def name
+      self.profile.name || self.email.split(/@/).first
+    end
   end
 
   class_methods do

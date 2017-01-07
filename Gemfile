@@ -114,6 +114,8 @@ gem 'rest-client'
 gem 'actionview-encoded_mail_to'
 gem 'devise', '4.2.0'
 gem 'devise-i18n', '1.1.1'
+gem 'devise_invitable', '1.7.0'
+gem 'cancancan', '1.15.0'
 
 # ------ #
 # - UI - #
@@ -123,7 +125,6 @@ gem 'sass-rails', '5.0.6'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
-gem 'turbolinks', '~> 5'
 gem 'kaminari', '0.17.0'
 gem 'simple_form', '3.2.1'
 gem 'cocoon'

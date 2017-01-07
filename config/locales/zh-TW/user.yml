@@ -26,17 +26,17 @@ zh-TW:
       change_password: 需要您目前密碼來完成變更
   user:
     labels:
-      management: 會員管理
+      management: 人員帳號管理
       edit_profile: 修改個人檔案
       resent_invitation: 重寄邀請信
-      invite_user: 邀請會員
+      invite_user: 邀請人員
     titles:
       super_admin_sign_up: 註冊超級管理員
-      index: 會員列表
-      show: 會員資訊
+      index: 人員帳號列表
+      show: 人員帳號資訊
     messages:
       super_admin_sign_up_success: 超級管理員註冊成功，請先前往 %{email} 信箱完成驗證手續。
       resent_invitation_success: 已成功重新寄送邀請信件給 %{email}。
-      lock_success: 已成功鎖定會員 %{email}。
-      unlock_success: 已成功解鎖會員 %{email}。
-      edit_success: 已成功編輯會員 %{email}。
+      lock_success: 已成功鎖定 %{email}。
+      unlock_success: 已成功解鎖 %{email}。
+      edit_success: 已成功編輯 %{email}。
