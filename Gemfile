@@ -53,11 +53,13 @@ end
 # ------------ #
 
 group :test do
+  gem 'cucumber', '1.3.20'
   gem 'cucumber-rails', '1.4.5', require: false
   gem 'selenium-webdriver', '2.53.4'
   gem 'database_cleaner', '1.5.3'
   gem 'rspec-rails', '3.5.2'
   gem 'factory_girl_rails', '4.7.0'
+  gem 'webrat', '0.7.3'
   gem 'email_spec', '2.1.0'
   gem 'json_spec', '1.1.4'
   # Use SimpleCov test Cucumber coverage
@@ -73,8 +75,8 @@ end
 # ------- #
 
 group :development, :test do
-  gem 'yard'
-  gem 'yard-cucumber'
+  gem 'yard', '0.8.7.6'
+  gem 'yard-cucumber', '2.3.2'
   gem 'redcarpet'
   gem 'github-markup'
 end
