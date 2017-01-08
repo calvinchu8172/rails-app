@@ -1,0 +1,12 @@
+- content_for :title, t('devise.invitations.edit.header')
+
+= simple_form_for resource, as: resource_name, url: invitation_url(resource_name), method: :put do |f|
+  = f.hidden_field :invitation_token
+  = f.input :password, label: false, wrapper_html: { class: 'has-feedback' } do
+    = f.input_field :password, placeholder: User.human_attribute_name(:password), autocomplete: 'off', autofocus: true, class: 'form-control has-feedback-left'
+    %span.fa.fa-key.form-control-feedback.left
+  = f.input :password_confirmation, label: false, wrapper_html: { class: 'has-feedback' } do
+    = f.input_field :password_confirmation, placeholder: User.human_attribute_name(:password_confirmation), autocomplete: 'off', class: 'form-control has-feedback-left'
+    %span.fa.fa-key.form-control-feedback.left
+  .form-group
+    = f.button :submit, t('common.labels.submit'), class: 'btn-block btn-success'

@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     post 'super_admin/confirmation',        to: 'super_admin/confirmations#create'
     # 變更密碼
     get  'admin/users/edit', to: 'users/registrations#edit',   as: 'edit_user_registration'
-    put  'admin/users/edit', to: 'users/registrations#update', as: 'user_registration'
+    put  'admin/users',      to: 'users/registrations#update', as: 'user_registration'
     # 邀請會員
     get  'admin/users/invitation/new', to: 'users/invitations#new'
     post 'admin/users/invitation',     to: 'users/invitations#create'

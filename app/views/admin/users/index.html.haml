@@ -1,0 +1,36 @@
+.row
+  .col-md-12.col-sm-12.col-xs-12
+    %p
+      = link_to admin_users_invitation_new_url, class: 'btn btn-primary btn-sm' do
+        = fa_icon('user-plus')
+        = t('user.labels.invite_user')
+  .col-md-12.col-sm-12.col-xs-12
+    .x_panel
+      .x_title
+        %h2= t('user.titles.index')
+        %ul.nav.navbar-right.panel_toolbox
+          %li
+            %a.collapse-link= fa_icon('chevron-up')
+        .clearfix
+      .x_content
+        %table.table.table-striped.table-bordered.dt-responsive.nowrap
+          %thead
+            %tr
+              %th= User.human_attribute_name(:email)
+              %th= Profile.human_attribute_name(:name)
+              %th= Profile.human_attribute_name(:role)
+              %th= User.human_attribute_name(:sign_in_count)
+              %th= User.human_attribute_name(:current_sign_in_at)
+              %th
+          %tbody
+            - @users.each do |user|
+              %tr
+                %td= user.email
+                %td= user.profile.name
+                %td= Profile.human_attribute_name("role.#{user.profile.role}")
+                %td= user.sign_in_count
+                %td= user.current_sign_in_at
+                %td
+                  = link_to admin_user_url(user), class: 'btn btn-info btn-xs' do
+                    = fa_icon('folder')
+                    = t('common.labels.view')

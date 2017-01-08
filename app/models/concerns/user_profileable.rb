@@ -11,7 +11,7 @@ module UserProfileable
       joins(:profile).merge(Profile.super_admin)
     }
     scope :not_super_admin, -> {
-      joins(:profile).merge(Profile.super_admin)
+      joins(:profile).merge(Profile.not_super_admin)
     }
 
     def super_admin!

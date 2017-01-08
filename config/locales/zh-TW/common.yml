@@ -8,6 +8,7 @@ zh-TW:
       confirm: 確認
       delete: 刪除
       download: 下載
+      view: 檢視
       edit: 編輯
       import: 匯入
       link: 連結
@@ -44,6 +45,7 @@ zh-TW:
       all: 全部
       done: 完成
       description: 描述
+      toolbar: 工具列
     confirms:
       activate: 您確定要啟用？
       delete: 您確定要刪除？

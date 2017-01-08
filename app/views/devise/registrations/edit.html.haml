@@ -1,8 +1,12 @@
-- content_for :title, t('devise.titles.change_password')
-
 .row
   .col-md-12.col-sm-12.col-xs-12
     .x_panel
+      .x_title
+        %h2= t('devise.titles.change_password')
+        %ul.nav.navbar-right.panel_toolbox
+          %li
+            %a.collapse-link= fa_icon('chevron-up')
+        .clearfix
       .x_content
         = simple_form_for resource, as: resource_name, url: registration_url(resource_name), method: :put, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f|
           = f.input :email, input_wrapper_html: { class: 'col-sm-9' } do

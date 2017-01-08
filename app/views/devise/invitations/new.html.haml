@@ -1,0 +1,21 @@
+.row
+  .col-md-12.col-sm-12.col-xs-12
+    .x_panel
+      .x_title
+        %h2= t('user.labels.invite_user')
+        %ul.nav.navbar-right.panel_toolbox
+          %li
+            %a.collapse-link= fa_icon('chevron-up')
+        .clearfix
+      .x_content
+        = simple_form_for resource, as: resource_name, url: admin_users_invitation_url, method: :post, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f|
+          = f.input :email, wrapper_html: { class: 'has-feedback' }, input_wrapper_html: { class: 'col-sm-4' }, required: true do
+            = f.input_field :email, autofocus: true, class: 'form-control has-feedback-left'
+            %span.fa.fa-envelope-o.form-control-feedback.left
+          = f.fields_for :profile, wrapper: :horizontal_form do |p|
+            = p.input :role, collection: Profile.role_select_options, input_wrapper_html: { class: 'col-sm-3' }
+          .ln_solid
+          .form-group
+            .col-sm-6.col-xs-12.col-md-offset-3
+              = f.button :submit, t('common.labels.submit'), class: 'btn-success'
+              = link_to t('common.labels.cancel'), admin_users_url, class: 'btn btn-default'

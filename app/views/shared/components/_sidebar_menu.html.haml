@@ -1,16 +1,14 @@
 #sidebar-menu.main_menu_side.hidden-print.main_menu
   .menu_section
     %ul.nav.side-menu
+
       - if can? :read, User
-        %li
-          %a
-            %i.fa.fa-users
+        = sidebar_menu_item controller: ['admin/users', 'users/invitations'] do
+          = link_to '#' do
+            = fa_icon('users')
             %label= t('user.labels.management')
             %span.fa.fa-chevron-down
           %ul.nav.child_menu
-            %li
+            = sidebar_child_menu_item controller: 'admin/users', action: [:index, :show] do
               = link_to admin_users_url do
                 = I18n.t('user.titles.index')
-            %li
-              = link_to admin_users_invitation_new_url do
-                = I18n.t('user.labels.invite_user')
