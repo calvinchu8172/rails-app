@@ -12,6 +12,7 @@ cucumber:
   script:
     - rename 's/.sample//' config/*.sample
     - bundle install --jobs $(nproc) --path=/cache/bundler
+    - rake bower:install[--allow-root] bower:resolve[--allow-root]
     - mysqladmin -uroot -h mysql create ppush-console_test
     - RAILS_ENV=test bundle exec rake db:migrate db:seed
     - mkdir test-plans

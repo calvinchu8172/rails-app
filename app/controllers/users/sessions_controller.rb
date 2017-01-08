@@ -2,7 +2,7 @@ class Users::SessionsController < Devise::SessionsController
 
   def new
     # # 當無任何超級管理員時，則跳轉到超級管理員註冊頁面
-    redirect_to super_admin_sign_up_url and return if User.super_admins.blank?
+    redirect_to super_admin_sign_up_url and return if User.super_admin.blank?
     # 載入上次登入的 Email 資訊
     if cookies[:email].present?
       params[:user] = { email: cookies[:email] }

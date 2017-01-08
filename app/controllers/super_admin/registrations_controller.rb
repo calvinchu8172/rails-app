@@ -2,7 +2,7 @@ class SuperAdmin::RegistrationsController < Devise::RegistrationsController
 
   def new
     # 當已經有超級管理員時，則跳回首頁
-    redirect_to root_url and return if User.super_admins.present?
+    redirect_to root_url and return if User.super_admin.present?
     # 清除 flash 訊息
     flash.clear
     super

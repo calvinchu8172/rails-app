@@ -17,6 +17,6 @@
   %br
     .separator
       .links
-        - unless User.super_admins.first.try(:confirmed?)
+        - unless User.super_admin.first.try(:confirmed?)
           = link_to t('devise.labels.resend_confirmation_email'), super_admin_confirmation_resend_url
         = link_to t('devise.labels.forgot_password'), new_password_url(resource_name)
