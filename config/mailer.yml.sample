@@ -8,7 +8,7 @@ development:
     password:
     authentication: login
     enable_starttls_auto: true
-  default_options:
+  default:
     from: myzyxel-dev-team@ecoworkinc.com
   default_url_options:
     host:
@@ -22,7 +22,7 @@ test:
     password:
     authentication: login
     enable_starttls_auto: true
-  default_options:
+  default:
     from: myzyxel-dev-team@ecoworkinc.com
   default_url_options:
     host: localhost
@@ -36,7 +36,7 @@ production:
     password:
     authentication: login
     enable_starttls_auto: true
-  default_options:
+  default:
     from: myzyxel-dev-team@ecoworkinc.com
   default_url_options:
     host:

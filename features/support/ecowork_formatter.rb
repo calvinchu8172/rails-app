@@ -1,6 +1,6 @@
 require 'cucumber/formatter/html'
 
-class ZyxelFormatter < Cucumber::Formatter::Html
+class EcoworkFormatter < Cucumber::Formatter::Html
 
   def inline_css
     @builder.style(type: 'text/css') do

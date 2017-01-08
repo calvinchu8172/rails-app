@@ -83,7 +83,12 @@ end
 
 When /^(?:|the .+ )fills in "([^"]*)" with "([^"]*)"(?: within "([^"]*)")?$/ do |field, value, selector_name|
   with_scope(selector_to(selector_name)) do
-    fill_in(field_id(field), with: value)
+    case field
+    when '密碼'
+      find(:css, "input[id$='password']:not([id$='current_password'])").set(value)
+    else
+      fill_in(field_id(field), with: value)
+    end
   end
 end
 

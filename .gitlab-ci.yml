@@ -1,0 +1,26 @@
+image: 683422241496.dkr.ecr.us-east-1.amazonaws.com/cd-rails-base:latest
+
+stages:
+  - test
+
+cucumber:
+  tags:
+    - ruby
+  stage: test
+  services:
+    - mysql:5.7
+  script:
+    - rename 's/.sample//' config/*.sample
+    - bundle install --jobs $(nproc) --path=/cache/bundler
+    - mysqladmin -uroot -h mysql create ppush-console_test
+    - RAILS_ENV=test bundle exec rake db:migrate db:seed
+    - mkdir test-plans
+    - xvfb-run -a bundle exec cucumber -f EcoworkFormatter -o test-plans/ppush-console.html
+    - yard config load_plugins true
+    - yardoc 'app/**/*.rb' 'features/**/*.feature'
+  artifacts:
+    paths:
+      - test-plans/
+      - doc
+  only:
+    - develop
