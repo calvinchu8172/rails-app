@@ -1,9 +1,19 @@
+- content_for :title, t('user.labels.management')
+
 .row
-  .col-md-12.col-sm-12.col-xs-12
-    %p
-      = link_to admin_users_invitation_new_url, class: 'btn btn-primary btn-sm' do
-        = fa_icon('user-plus')
-        = t('user.labels.invite_user')
+  - if can? :invite, User
+    .col-md-12.col-sm-12.col-xs-12.toolbar
+      .x_panel
+        .x_title
+          %h2= t('common.labels.toolbar')
+          %ul.nav.navbar-right.panel_toolbox
+            %li
+              %a.collapse-link= fa_icon('chevron-up')
+          .clearfix
+        .x_content
+          = link_to admin_users_invitation_new_url, class: 'btn btn-app btn-sm' do
+            = fa_icon('user-plus')
+            = t('user.labels.invite_user')
   .col-md-12.col-sm-12.col-xs-12
     .x_panel
       .x_title
@@ -13,7 +23,7 @@
             %a.collapse-link= fa_icon('chevron-up')
         .clearfix
       .x_content
-        %table.table.table-striped.table-bordered.dt-responsive.nowrap
+        %table.table.table-bordered.dt-responsive.nowrap
           %thead
             %tr
               %th= User.human_attribute_name(:email)
@@ -31,6 +41,6 @@
                 %td= user.sign_in_count
                 %td= user.current_sign_in_at
                 %td
-                  = link_to admin_user_url(user), class: 'btn btn-info btn-xs' do
+                  = link_to admin_user_url(user), class: 'btn btn-primary btn-xs' do
                     = fa_icon('folder')
                     = t('common.labels.view')

@@ -2,7 +2,9 @@ class Profile < ActiveRecord::Base
 
   strip_attributes
 
-  enum role: { admin: 0, manager: 1, super_admin: 99 }
+  enum role: { user: 0, admin: 1, super_admin: 99 }
+
+  default_value_for :role, 'user'
 
   belongs_to :user
 

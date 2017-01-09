@@ -41,7 +41,8 @@ $icon-font-path: 'bootstrap-sass/assets/fonts/bootstrap/';
  * Themes
  */
 
-@import 'themes/gentelella';
+@import 'themes/gentelella/main';
+@import 'themes/gentelella/override';
 
 /**
  * Layout & Main

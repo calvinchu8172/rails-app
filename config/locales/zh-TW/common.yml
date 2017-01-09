@@ -46,6 +46,8 @@ zh-TW:
       done: 完成
       description: 描述
       toolbar: 工具列
+      lock: 鎖定
+      unlock: 解鎖
     confirms:
       activate: 您確定要啟用？
       delete: 您確定要刪除？

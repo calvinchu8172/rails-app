@@ -1,0 +1,87 @@
+- content_for :title, t('user.labels.management')
+
+.row
+  .col-md-12.col-sm-12.col-xs-12.toolbar
+    .x_panel
+      .x_title
+        %h2= t('common.labels.toolbar')
+        %ul.nav.navbar-right.panel_toolbox
+          %li
+            %a.collapse-link= fa_icon('chevron-up')
+        .clearfix
+      .x_content
+        = link_to admin_users_url, class: 'btn btn-app btn-sm' do
+          = fa_icon('caret-square-o-left')
+          = t('common.labels.back')
+        - if can?(:resent_invitation, @user) && !@user.super_admin? && !@user.invitation_accepted?
+          = link_to invitation_resent_admin_user_url(@user), class: 'btn btn-app btn-sm', 'data-confirm' => t('common.messages.confirm') do
+            = fa_icon('envelope-o')
+            = t('user.labels.resent_invitation')
+        - if can?(:update, @user)
+          = link_to edit_admin_user_url(@user), class: 'btn btn-app btn-sm' do
+            = fa_icon('pencil')
+            = t('common.labels.edit')
+        - if can?(:lock, @user)
+          = link_to lock_admin_user_url(@user), class: 'btn btn-app btn-sm', 'data-confirm' => t('common.messages.confirm'), method: 'delete' do
+            = fa_icon('lock')
+            = t('common.labels.lock')
+        - if can?(:unlock, @user)
+          = link_to unlock_admin_user_url(@user), class: 'btn btn-app btn-sm', 'data-confirm' => t('common.messages.confirm'), method: 'put' do
+            = fa_icon('unlock')
+            = t('common.labels.unlock')
+  .col-md-12.col-sm-12.col-xs-12
+    .x_panel
+      .x_title
+        %h2= t('user.titles.show')
+        %ul.nav.navbar-right.panel_toolbox
+          %li
+            %a.collapse-link= fa_icon('chevron-up')
+        .clearfix
+      .x_content
+        .form-horizontal
+          .form-group
+            = label_tag :user, User.human_attribute_name(:email), class: 'control-label col-sm-2 col-xs-12'
+            .col-sm-10.col-xs-12
+              %p.form-control-static
+                = @user.email
+          .form-group
+            = label_tag :user, Profile.human_attribute_name(:name), class: 'control-label col-sm-2 col-xs-12'
+            .col-sm-10.col-xs-12
+              %p.form-control-static
+                = @user.profile.name
+          .form-group
+            = label_tag :user, Profile.human_attribute_name(:role), class: 'control-label col-sm-2 col-xs-12'
+            .col-sm-10.col-xs-12
+              %p.form-control-static
+                = Profile.human_attribute_name("role.#{@user.profile.role}")
+          .form-group
+            = label_tag :user, User.human_attribute_name(:sign_in_count), class: 'control-label col-sm-2 col-xs-12'
+            .col-sm-10.col-xs-12
+              %p.form-control-static
+                = @user.sign_in_count
+          .form-group
+            = label_tag :user, User.human_attribute_name(:current_sign_in_at), class: 'control-label col-sm-2 col-xs-12'
+            .col-sm-10.col-xs-12
+              %p.form-control-static
+                = @user.current_sign_in_at
+          - if @user.created_by_invite?
+            .form-group
+              = label_tag :user, User.human_attribute_name(:invitation_created_at), class: 'control-label col-sm-2 col-xs-12'
+              .col-sm-10.col-xs-12
+                %p.form-control-static
+                  = @user.invitation_created_at
+            .form-group
+              = label_tag :user, User.human_attribute_name(:invited_by), class: 'control-label col-sm-2 col-xs-12'
+              .col-sm-10.col-xs-12
+                %p.form-control-static
+                  = @user.invited_by.email
+            .form-group
+              = label_tag :user, User.human_attribute_name(:invitation_accepted_at), class: 'control-label col-sm-2 col-xs-12'
+              .col-sm-10.col-xs-12
+                %p.form-control-static
+                  = @user.invitation_accepted_at
+            .form-group
+              = label_tag :user, User.human_attribute_name(:locked_at), class: 'control-label col-sm-2 col-xs-12'
+              .col-sm-10.col-xs-12
+                %p.form-control-static
+                  = @user.locked_at

@@ -13,7 +13,7 @@
             %li
               = link_to edit_user_registration_url do
                 = fa_icon('edit', class: 'pull-right')
-                = I18n.t('user.labels.edit_profile')
+                = t('user.labels.edit_profile')
             %li
               = link_to destroy_user_session_url, method: :delete do
                 = fa_icon('sign-out', class: 'pull-right')

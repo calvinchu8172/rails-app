@@ -4,7 +4,7 @@ window.PPush.common =
 
     # alert fade out
     $('.alert').on 'click', ->
-      $(@).fadeOut(500)
+      $(@).parent().fadeOut(500)
 
     # set timezone
     set_time_zone()

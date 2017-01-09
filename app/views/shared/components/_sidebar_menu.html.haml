@@ -9,6 +9,6 @@
             %label= t('user.labels.management')
             %span.fa.fa-chevron-down
           %ul.nav.child_menu
-            = sidebar_child_menu_item controller: 'admin/users', action: [:index, :show] do
+            = sidebar_child_menu_item controller: 'admin/users', action: :index do
               = link_to admin_users_url do
-                = I18n.t('user.titles.index')
+                = t('user.titles.index')

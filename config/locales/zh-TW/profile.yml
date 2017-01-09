@@ -3,8 +3,8 @@ zh-TW:
     attributes:
       profile:
         name: 暱稱
-        role: 權限
+        role: 角色
       profile/role:
-        super_admin: 超級管理員
+        user: 一般使用者
         admin: 管理員
-        manager: 經理
+        super_admin: 超級管理員

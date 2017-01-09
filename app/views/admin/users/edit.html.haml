@@ -1,0 +1,23 @@
+- content_for :title, t('user.labels.management')
+
+.row
+  .col-md-12.col-sm-12.col-xs-12
+    .x_panel
+      .x_title
+        %h2= t('user.titles.edit')
+        %ul.nav.navbar-right.panel_toolbox
+          %li
+            %a.collapse-link= fa_icon('chevron-up')
+        .clearfix
+      .x_content
+        = simple_form_for @user, url: admin_user_url, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f|
+          = f.input :email, input_wrapper_html: { class: 'col-sm-9' } do
+            %p.form-control-static
+              = @user.email
+          = f.fields_for :profile, wrapper: :horizontal_form do |p|
+            = p.input :role, collection: Profile.role_select_options, input_wrapper_html: { class: 'col-sm-3' }
+          .ln_solid
+          .form-group
+            .col-sm-6.col-xs-12.col-md-offset-3
+              = f.button :submit, t('common.labels.submit'), class: 'btn-success'
+              = link_to t('common.labels.cancel'), admin_user_url(@user), class: 'btn btn-default'
