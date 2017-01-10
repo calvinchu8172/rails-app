@@ -2,13 +2,13 @@
   .col-md-12.col-sm-12.col-xs-12
     .x_panel
       .x_title
-        %h2= t('user.labels.invite_user')
+        %h2= t('user.labels.create_user')
         %ul.nav.navbar-right.panel_toolbox
           %li
             %a.collapse-link= fa_icon('chevron-up')
         .clearfix
       .x_content
-        = simple_form_for resource, as: resource_name, url: admin_users_invitation_url, method: :post, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f|
+        = simple_form_for resource, as: resource_name, url: admin_users_creation_url, method: :post, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f|
           = f.input :email, wrapper_html: { class: 'has-feedback' }, input_wrapper_html: { class: 'col-sm-4' }, required: true do
             = f.input_field :email, autofocus: true, class: 'form-control has-feedback-left'
             %span.fa.fa-envelope-o.form-control-feedback.left

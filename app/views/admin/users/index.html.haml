@@ -1,7 +1,7 @@
 - content_for :title, t('user.labels.management')
 
 .row
-  - if can? :invite, User
+  - if can? :create, User
     .col-md-12.col-sm-12.col-xs-12.toolbar
       .x_panel
         .x_title
@@ -11,9 +11,9 @@
               %a.collapse-link= fa_icon('chevron-up')
           .clearfix
         .x_content
-          = link_to admin_users_invitation_new_url, class: 'btn btn-app btn-sm' do
+          = link_to admin_users_creation_new_url, class: 'btn btn-app btn-sm' do
             = fa_icon('user-plus')
-            = t('user.labels.invite_user')
+            = t('user.labels.create_user')
   .col-md-12.col-sm-12.col-xs-12
     .x_panel
       .x_title

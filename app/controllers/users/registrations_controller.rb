@@ -9,7 +9,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     super do |resource|
       # 紀錄使用者修改密碼事件
-      Log.write(resource, resource, 'changed_password') if resource.errors.empty?
+      Log.write(resource, resource, 'change_password') if resource.errors.empty?
     end
   end
 

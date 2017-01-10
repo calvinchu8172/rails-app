@@ -5,6 +5,7 @@ zh-TW:
         name: 暱稱
         role: 角色
       profile/role:
-        user: 一般使用者
-        admin: 管理員
+        user_manager: 使用者管理員
+        app_manager: 應用管理員
+        content_manager: 內容管理員
         super_admin: 超級管理員

@@ -13,10 +13,10 @@
         = link_to admin_users_url, class: 'btn btn-app btn-sm' do
           = fa_icon('caret-square-o-left')
           = t('common.labels.back')
-        - if can?(:resent_invitation, @user) && !@user.super_admin? && !@user.invitation_accepted?
-          = link_to invitation_resent_admin_user_url(@user), class: 'btn btn-app btn-sm', 'data-confirm' => t('common.messages.confirm') do
+        - if can?(:resend_creation, @user)
+          = link_to creation_resend_admin_user_url(@user), class: 'btn btn-app btn-sm', 'data-confirm' => t('common.messages.confirm') do
             = fa_icon('envelope-o')
-            = t('user.labels.resent_invitation')
+            = t('user.labels.resend_creation')
         - if can?(:update, @user)
           = link_to edit_admin_user_url(@user), class: 'btn btn-app btn-sm' do
             = fa_icon('pencil')
@@ -75,11 +75,6 @@
               .col-sm-10.col-xs-12
                 %p.form-control-static
                   = @user.invited_by.email
-            .form-group
-              = label_tag :user, User.human_attribute_name(:invitation_accepted_at), class: 'control-label col-sm-2 col-xs-12'
-              .col-sm-10.col-xs-12
-                %p.form-control-static
-                  = @user.invitation_accepted_at
             .form-group
               = label_tag :user, User.human_attribute_name(:locked_at), class: 'control-label col-sm-2 col-xs-12'
               .col-sm-10.col-xs-12

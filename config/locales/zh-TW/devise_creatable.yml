@@ -1,0 +1,19 @@
+zh-TW:
+  devise:
+    failure:
+      invited: 你已經被新增加入本站，請檢查信件並進行認證完成新增帳號。
+    creations:
+      send_instructions: 已寄送認證信件給 %{email}。
+      invitation_token_invalid: 非有效的認證辨識金鑰
+      updated: 你已經成功設置密碼及登入本站。
+      updated_not_active: 密碼已經設置成功。
+      edit:
+        header: 設置密碼
+    mailer:
+      invitation_instructions:
+        subject: 認證說明
+        hello: "%{email} 您好~"
+        someone_invited_you: 有人將你加入網站 %{url}，你可以透過以下連結進行認證：
+        accept: 進行認證
+        accept_until: 此認證將於 %{due_date} 到期。
+        ignore: 如果你不想接受，請忽略此信件。<br>在你進行認證並透過上述連結設定你的密碼前，你的帳號並不會被建立。

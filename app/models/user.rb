@@ -9,6 +9,6 @@ class User < ApplicationRecord
 
   # 使用者登入紀錄
   def after_database_authentication
-    Log.write(self, self, 'user_signed_in')
+    Log.write(self, self, 'user_sign_in')
   end
 end

@@ -6,7 +6,10 @@ Rails.application.routes.draw do
     controllers: {
       passwords:   'users/passwords',
       sessions:    'users/sessions',
-      invitations: 'users/invitations'
+      invitations: 'users/creations'
+    },
+    path_names: {
+      invitation: 'creation'
     },
     skip: [:registrations, :confirmations]
 
@@ -21,19 +24,19 @@ Rails.application.routes.draw do
     # 變更密碼
     get  'admin/users/edit', to: 'users/registrations#edit',   as: 'edit_user_registration'
     put  'admin/users',      to: 'users/registrations#update', as: 'user_registration'
-    # 邀請會員
-    get  'admin/users/invitation/new', to: 'users/invitations#new'
-    post 'admin/users/invitation',     to: 'users/invitations#create'
+    # 新增人員
+    get  'admin/users/creation/new', to: 'users/creations#new',    as: 'admin_users_creation_new'
+    post 'admin/users/creation',     to: 'users/creations#create', as: 'admin_users_creation'
   end
 
   namespace :admin do
     resources :users, only: [:index, :show, :edit, :update] do
       member do
-        # 重寄邀請信
-        get    'invitation/resent', to: 'users#resent_invitation'
+        # 重寄新增認證信
+        get    'creation/resend', to: 'users#resend_creation'
         # 鎖定與解鎖帳號
-        delete 'lock',              to: 'users#lock'
-        put    'unlock',            to: 'users#unlock'
+        delete 'lock',   to: 'users#lock'
+        put    'unlock', to: 'users#unlock'
       end
     end
   end

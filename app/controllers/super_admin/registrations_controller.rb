@@ -15,7 +15,7 @@ class SuperAdmin::RegistrationsController < Devise::RegistrationsController
       # 更新 user.profile.role = super_admin
       resource.super_admin!
       # 紀錄管理員註冊事件
-      Log.write(resource, resource, 'super_admin_signed_up')
+      Log.write(resource, resource, 'super_admin_sign_up')
       expire_data_after_sign_in!
       flash[:notice] = t('user.messages.super_admin_sign_up_success', email: resource.email)
       redirect_to new_user_session_url

@@ -1,10 +1,10 @@
-class Users::InvitationsController < Devise::InvitationsController
+class Users::CreationsController < Devise::InvitationsController
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def new
     # CanCanCan
-    authorize! :invite, User
+    authorize! :create, User
 
     self.resource = resource_class.new
     self.resource.build_profile if self.resource.profile.nil?
@@ -14,18 +14,18 @@ class Users::InvitationsController < Devise::InvitationsController
 
   def create
     # CanCanCan
-    authorize! :invite, User
+    authorize! :create, User
 
     super do |resource|
-      # 紀錄邀請會員事件
-      Log.write(current_user, resource, 'invited_user') if resource.errors.empty?
+      # 紀錄新增人員事件
+      Log.write(current_user, resource, 'create_user') if resource.errors.empty?
     end
   end
 
   def update
     super do |resource|
-      # 紀錄會員接受邀請事件
-      Log.write(resource, resource.invited_by, 'accepted_invitation') if resource.errors.empty?
+      # 紀錄接受新增事件
+      Log.write(resource, resource.invited_by, 'accept_creation') if resource.errors.empty?
     end
   end
 
@@ -39,5 +39,9 @@ class Users::InvitationsController < Devise::InvitationsController
       devise_parameter_sanitizer.permit(:invite, keys: [
         { profile_attributes: [:id, :role] }
       ])
+    end
+
+    def translation_scope
+      'devise.creations'
     end
 end
