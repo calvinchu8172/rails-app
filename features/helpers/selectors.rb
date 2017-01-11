@@ -4,7 +4,8 @@ module SelectorsHelper
     return unless selector_name
 
     case selector_name
-    when ''
+    when '側邊功能'
+      '#sidebar-menu'
     else
       raise "Can't find mapping from \"#{selector_name}\" to a selector.\n" +
         "Now, go and add a mapping in #{__FILE__}"

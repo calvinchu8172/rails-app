@@ -93,6 +93,10 @@ When /^(?:I|they|"([^"]*?)") opens? the email with text \/([^"]*?)\/$/ do |addre
   open_email(address, :with_text => Regexp.new(text))
 end
 
+When /^(?:I|they|"([^"]*?)") opens? the last email$/ do |address|
+  open_last_email_for(address)
+end
+
 #
 # Inspect the Email Contents
 #
@@ -201,6 +205,10 @@ end
 
 When /^(?:|the .+ )clicks the first link in the email$/ do
   click_first_link_in_email
+end
+
+When /^(?:|the .+ )clicks the link in the email - "([^"]*?)"$/ do |regex|
+  click_email_link_matching(/#{regex}/)
 end
 
 #

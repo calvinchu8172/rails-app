@@ -127,7 +127,6 @@ end
 When /^(?:|the .+ )selects "([^"]*)" from "([^"]*)"(?: within "([^"]*)")?$/ do |value, field, selector_name|
   with_scope(selector_to(selector_name)) do
     select(value, from: field_id(field))
-    instance_variable_set("@#{field.parameterize.underscore}", value)
   end
   wait_for_ajax
 end

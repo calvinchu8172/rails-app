@@ -15,13 +15,13 @@ module TableHelper
     case table_name
     when ''
     else
-      '.data_table'
+      '.table'
     end
   end
 
   def table_html?(table_name)
     case table_name
-    when ''
+    when 'user'
     else
       false
     end
