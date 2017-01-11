@@ -16,7 +16,7 @@ cucumber:
     - mysqladmin -uroot -h mysql create ppush-console_test
     - RAILS_ENV=test bundle exec rake db:migrate db:seed
     - mkdir test-plans
-    - xvfb-run -a bundle exec cucumber -f EcoworkFormatter -o test-plans/ppush-console.html
+    - xvfb-run -a --server-args="-screen 0 1680x1000x24" bundle exec cucumber -f EcoworkFormatter -o test-plans/ppush-console.html
     - yard config load_plugins true
     - yardoc 'app/**/*.rb' 'features/**/*.feature'
   artifacts:
