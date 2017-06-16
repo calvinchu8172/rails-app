@@ -1,6 +1,6 @@
 - content_for :title, t('devise.titles.sign_in')
 
-= simple_form_for resource, as: resource_name, url: session_url(resource_name), method: :post do |f|
+= simple_form_for resource, as: resource_name, url: session_url(resource_name) do |f|
   = f.input :email, label: false, wrapper_html: { class: 'has-feedback' } do
     = f.input_field :email, placeholder: User.human_attribute_name(:email), autofocus: true, class: 'form-control has-feedback-left'
     %span.fa.fa-envelope-o.form-control-feedback.left
