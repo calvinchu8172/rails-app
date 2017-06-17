@@ -106,11 +106,3 @@ Logging::Rails.configure do |config|
     end
   end
 end
-
-# Fixed logging for rails 5
-module ActiveSupport
-  module Dependencies
-    def self.logger=(_)
-    end
-  end
-end

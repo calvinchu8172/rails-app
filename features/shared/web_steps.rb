@@ -28,34 +28,42 @@ When /^(?:|the .+ )goes to (.+)page(?:| - "([^"]*)")$/ do |page_name, expect_pat
   else
     visit path_to(page_name)
   end
+  sleep 1
 end
 
 When /^(?:|the .+ )presses "([^"]*)"(?: within "([^"]*)")?$/ do |button, selector_name|
   wait_for_ajax
-  with_scope(selector_to(selector_name)) do
+  with_scope(to_selector(selector_name)) do
     click_button(button)
   end
 end
 
 When /^(?:|the .+ )clicks "([^"]*)"(?: within "([^"]*)")?$/ do |link, selector_name|
   wait_for_ajax
-  with_scope(selector_to(selector_name)) do
+  with_scope(to_selector(selector_name)) do
     click_link(link, exact: false)
   end
 end
 
-When /^(?:|the .+ )clicks "([^"]*)" link(?: within "([^"]*)")?$/ do |link_text, selector_name|
+When /^(?:|the .+ )clicks "([^"]*)" link(?: within "([^"]*)")? and open a new tab$/ do |link, selector_name|
   wait_for_ajax
-  with_scope(selector_to(selector_name)) do
+  with_scope(to_selector(selector_name)) do
+    @new_window = window_opened_by { click_link(link, exact: false) }
+  end
+end
+
+When /^(?:|the .+ )clicks "([^"]*)" link(?: within "([^"]*)")?$/ do |link, selector_name|
+  wait_for_ajax
+  with_scope(to_selector(selector_name)) do
     if @link
       @link.click
       @link = nil
     else
-      links = page.all('a', text: /^#{link_text}$/)
+      links = page.all('a', text: link, minimum: 1)
       if links.size > 1
-        links.each { |link| link.click if link[:href] != '#' && link.text == link_text }
+        links.each { |x| x.click if x[:href] != '#' && x.text == link }
       else
-        click_link(link_to(link_text))
+        click_link(link)
       end
     end
   end
@@ -64,7 +72,7 @@ end
 When /^(?:|the .+ )clicks "([^"]*)" tab(?: within "([^"]*)")?$/ do |link, selector_name|
   wait_for_ajax
   with_scope('.tabs_sub') do
-    click_link(link_to(link))
+    click_link(link)
   end
 end
 
@@ -82,12 +90,23 @@ When /^(?:|the .+ )clicks "([^"]*)" icon(?: from row "([^"]*)")?$/ do |link, ind
 end
 
 When /^(?:|the .+ )fills in "([^"]*)" with "([^"]*)"(?: within "([^"]*)")?$/ do |field, value, selector_name|
-  with_scope(selector_to(selector_name)) do
+  with_scope(to_selector(selector_name)) do
     case field
     when '密碼'
       find(:css, "input[id$='password']:not([id$='current_password'])").set(value)
     else
       fill_in(field_id(field), with: value)
+    end
+  end
+end
+
+When /^(?:|the .+ )fills in "([^"]*)" with date "([^"]*)"(?: within "([^"]*)")?$/ do |field, value, selector_name|
+  with_scope(to_selector(selector_name)) do
+    field_id = field_id(field)
+    find("input[id*=#{field_id}]").set(value)
+    if Capybara.current_driver.to_s =~ /selenium/
+      page.evaluate_script("$('input[id*=#{field_id}]').datepicker('hide');")
+      sleep(0.5)
     end
   end
 end
@@ -98,7 +117,7 @@ When /^(?:|the .+ )fills the invalid "(.*?)" - "(.*?)"$/ do |field, value|
 end
 
 When /^(?:|the .+ )fills in "([^"]*)" for "([^"]*)"(?: within "([^"]*)")?$/ do |value, field, selector_name|
-  with_scope(selector_to(selector_name)) do
+  with_scope(to_selector(selector_name)) do
     fill_in(field, with: value)
   end
 end
@@ -115,9 +134,9 @@ end
 # based on naming conventions.
 
 When /^(?:|the .+ )fills in the following(?: within "([^"]*)")?:$/ do |selector, fields|
-  with_scope(selector_to(selector_name)) do
+  with_scope(to_selector(selector_name)) do
     fields.rows_hash.each do |field, value|
-      with_scope(selector_to(selector_name)) do
+      with_scope(to_selector(selector_name)) do
         fill_in(field, with: value)
       end
     end
@@ -125,32 +144,33 @@ When /^(?:|the .+ )fills in the following(?: within "([^"]*)")?:$/ do |selector,
 end
 
 When /^(?:|the .+ )selects "([^"]*)" from "([^"]*)"(?: within "([^"]*)")?$/ do |value, field, selector_name|
-  with_scope(selector_to(selector_name)) do
+  with_scope(to_selector(selector_name)) do
     select(value, from: field_id(field))
   end
   wait_for_ajax
 end
 
 When /^(?:|the .+ )checks "([^"]*)"(?: within "([^"]*)")?$/ do |field, selector_name|
-  with_scope(selector_to(selector_name)) do
+  wait_for_ajax
+  with_scope(to_selector(selector_name)) do
     check(field_id(field))
   end
 end
 
 When /^(?:|the .+ )unchecks "([^"]*)"(?: within "([^"]*)")?$/ do |field, selector_name|
-  with_scope(selector_to(selector_name)) do
+  with_scope(to_selector(selector_name)) do
     uncheck(field_id(field))
   end
 end
 
 When /^(?:|the .+ )chooses "([^"]*)"(?: within "([^"]*)")?$/ do |field, selector_name|
-  with_scope(selector_to(selector_name)) do
+  with_scope(to_selector(selector_name)) do
     choose(field)
   end
 end
 
 When /^(?:|the .+ )attaches the file "([^"]*)" to "([^"]*)"(?: within "([^"]*)")?$/ do |path, field, selector_name|
-  with_scope(selector_to(selector_name)) do
+  with_scope(to_selector(selector_name)) do
     attach_file(field, path)
   end
 end
@@ -163,14 +183,22 @@ Then /^(?:|the .+ )should see JSON:$/ do |expected_json|
 end
 
 Then /^(?:|the .+ )should see "([^"]*)"(?: within "([^"]*)")?$/ do |text, selector_name|
-  with_scope(selector_to(selector_name)) do
+  with_scope(to_selector(selector_name)) do
     expect(page).to have_content(text)
+  end
+end
+
+Then /^(?:|the .+ )should see "([^"]*)"(?: within "([^"]*)")? at the new tab$/ do |text, selector_name|
+  within_window @new_window do
+    with_scope(to_selector(selector_name)) do
+      expect(page).to have_content(text)
+    end
   end
 end
 
 Then /^(?:|the .+ )should see \/([^\/]*)\/(?: within "([^"]*)")?$/ do |regexp, selector_name|
   regexp = Regexp.new(regexp)
-  with_scope(selector_to(selector_name)) do
+  with_scope(to_selector(selector_name)) do
     if self.respond_to? :expect
       expect(page).to have_xpath('//*', text: regexp)
     else
@@ -180,7 +208,7 @@ Then /^(?:|the .+ )should see \/([^\/]*)\/(?: within "([^"]*)")?$/ do |regexp, s
 end
 
 Then /^(?:|the .+ )should not see "([^"]*)"(?: within "([^"]*)")?$/ do |text, selector_name|
-  with_scope(selector_to(selector_name)) do
+  with_scope(to_selector(selector_name)) do
     if self.respond_to? :expect
       expect(page).to have_no_content(text)
     else
@@ -189,9 +217,17 @@ Then /^(?:|the .+ )should not see "([^"]*)"(?: within "([^"]*)")?$/ do |text, se
   end
 end
 
+Then /^(?:|the .+ )should not see "([^"]*)"(?: within "([^"]*)")? at the new tab$/ do |text, selector_name|
+  within_window @new_window do
+    with_scope(to_selector(selector_name)) do
+      expect(page).to have_no_content(text)
+    end
+  end
+end
+
 Then /^(?:|the .+ )should not see \/([^\/]*)\/(?: within "([^"]*)")?$/ do |regexp, selector_name|
   regexp = Regexp.new(regexp)
-  with_scope(selector_to(selector_name)) do
+  with_scope(to_selector(selector_name)) do
     if self.respond_to? :expect
       expect(page).to have_no_xpath('//*', text: regexp)
     else
@@ -201,7 +237,7 @@ Then /^(?:|the .+ )should not see \/([^\/]*)\/(?: within "([^"]*)")?$/ do |regex
 end
 
 Then /^the "([^"]*)" field(?: within "([^"]*)")? should contain "([^"]*)"$/ do |field, selector, value|
-  with_scope(selector_to(selector_name)) do
+  with_scope(to_selector(selector_name)) do
     field = find_field(field)
     field_value = (field.tag_name == 'textarea') ? field.text : field.value
     if self.respond_to? :expect
@@ -213,7 +249,7 @@ Then /^the "([^"]*)" field(?: within "([^"]*)")? should contain "([^"]*)"$/ do |
 end
 
 Then /^the "([^"]*)" field(?: within "([^"]*)")? should not contain "([^"]*)"$/ do |field, selector, value|
-  with_scope(selector_to(selector_name)) do
+  with_scope(to_selector(selector_name)) do
     field = find_field(field)
     field_value = (field.tag_name == 'textarea') ? field.text : field.value
     if self.respond_to? :expect
@@ -225,7 +261,7 @@ Then /^the "([^"]*)" field(?: within "([^"]*)")? should not contain "([^"]*)"$/ 
 end
 
 Then /^the "([^"]*)" checkbox(?: within "([^"]*)")? should be checked$/ do |label, selector_name|
-  with_scope(selector_to(selector_name)) do
+  with_scope(to_selector(selector_name)) do
     field_checked = find_field(label)['checked']
     if self.respond_to? :expect
       expect(field_checked).to be true
@@ -236,7 +272,7 @@ Then /^the "([^"]*)" checkbox(?: within "([^"]*)")? should be checked$/ do |labe
 end
 
 Then /^the "([^"]*)" checkbox(?: within "([^"]*)")? should not be checked$/ do |label, selector_name|
-  with_scope(selector_to(selector_name)) do
+  with_scope(to_selector(selector_name)) do
     field_checked = find_field(label)['checked']
     if self.respond_to? :expect
       expect(field_checked).to be false
@@ -314,8 +350,38 @@ Then /^(?:|the .+ )should not see a notification \- "(.*?)"$/ do |text|
   expect(page).to have_no_content(text)
 end
 
+When /^(?:|the .+ )close the notification$/ do
+  find('.ui-dialog-titlebar-close').click
+end
+
+Then /^(?:|the .+ )should see a button - "([^"]*)"?$/ do |text|
+  expect(has_css?("input[value='#{text}'][type=submit],input[value='#{text}'][type=button]")).to be_truthy
+end
+
+Then /^(?:|the .+ )should not see a button - "([^"]*)"?$/ do |text|
+  expect(has_no_css?("input[value='#{text}'][type=submit],input[value='#{text}'][type=button]")).to be_truthy
+end
+
+Then /^(?:|the .+ )should see a checkbox - "([^"]*)"?$/ do |text|
+  expect(has_css?("input[id*='#{text}'][type=checkbox]")).to be_truthy
+end
+
+Then /^(?:|the .+ )should not see a checkbox - "([^"]*)"?$/ do |text|
+  expect(has_no_css?("input[id*='#{text}'][type=checkbox]")).to be_truthy
+end
+
 Then /^show me the page$/ do
   save_and_open_page
+end
+
+When /^(?:|the .+ )presses "(.*?)" button to add the email to "(.*?)"$/ do |button, section|
+  button_id = "#add_#{section.downcase.gsub(' ','_')}_email"
+  find(button_id).click
+end
+
+Then /^(?:|the .+ )should see "(.*?)" select for "(.*?)"$/ do |select_label, text|
+  expect(page).to have_content(select_label)
+  expect(page).to have_content(text)
 end
 
 Then /^there are no matching records found$/ do
@@ -333,12 +399,10 @@ When /^(?:|the .+ )wait for page reloaded$/ do
 end
 
 When /^(?:|the .+ )reload the page$/ do
-  case Capybara.current_driver
-  when :selenium
+  case Capybara.current_driver.to_s
+  when /selenium/
     visit page.driver.browser.current_url
-  when :selenium_billy
-    visit page.driver.browser.current_url
-  when :racktest
+  when 'racktest'
     visit [ current_path, page.driver.last_request.env['QUERY_STRING'] ].reject(&:blank?).join('?')
   else
     raise "unsupported driver, use rack::test or selenium/webdriver"

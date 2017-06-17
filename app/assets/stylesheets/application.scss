@@ -16,8 +16,10 @@ $icon-font-path: 'bootstrap-sass/assets/fonts/bootstrap/';
  * Fonts & Font icons
  */
 
-$fa-font-path: 'font-awesome/fonts/';
-@import 'font-awesome/scss/font-awesome';
+// @import 'fonts/*';
+$fa-font-path: 'font-awesome-sass/assets/fonts/font-awesome/';
+@import 'font-awesome-sass/assets/stylesheets/font-awesome-sprockets';
+@import 'font-awesome-sass/assets/stylesheets/font-awesome';
 
 /**
  * Mixins css:
