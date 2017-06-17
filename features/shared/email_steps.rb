@@ -57,11 +57,17 @@ Then /^(?:I|they|"([^"]*?)") should have (an|no|\d+) emails?$/ do |address, amou
 end
 
 Then /^(?:I|they|"([^"]*?)") should receive (an|no|\d+) emails? with subject "([^"]*?)"$/ do |address, amount, subject|
-  expect(unread_emails_for(address).select { |m| m.subject =~ Regexp.new(Regexp.escape(subject)) }.size).to eql parse_email_count(amount)
+  unread_emails = unread_emails_for(address).select { |m|
+    m.subject =~ Regexp.new(Regexp.escape(subject))
+  }
+  expect(unread_emails.size).to eql parse_email_count(amount)
 end
 
 Then /^(?:I|they|"([^"]*?)") should receive (an|no|\d+) emails? with subject \/([^"]*?)\/$/ do |address, amount, subject|
-  expect(unread_emails_for(address).select { |m| m.subject =~ Regexp.new(subject) }.size).to eql parse_email_count(amount)
+  unread_emails = unread_emails_for(address).select { |m|
+    m.subject =~ Regexp.new(subject)
+  }
+  expect(unread_emails.size).to eql parse_email_count(amount)
 end
 
 Then /^(?:I|they|"([^"]*?)") should receive an email with the following body:$/ do |address, expected_body|
@@ -78,7 +84,10 @@ When /^(?:I|they|"([^"]*?)") opens? the email$/ do |address|
 end
 
 When /^(?:I|they|"([^"]*?)") opens? the email with subject "([^"]*?)"$/ do |address, subject|
-  open_email(address, :with_subject => subject)
+  unread_emails = unread_emails_for(address).select{ |m|
+    m.subject =~ Regexp.new(Regexp.escape(subject))
+  }
+  set_current_email(unread_emails.first)
 end
 
 When /^(?:I|they|"([^"]*?)") opens? the email with subject \/([^"]*?)\/$/ do |address, subject|
@@ -93,55 +102,59 @@ When /^(?:I|they|"([^"]*?)") opens? the email with text \/([^"]*?)\/$/ do |addre
   open_email(address, :with_text => Regexp.new(text))
 end
 
+When /^(?:I|they|"([^"]*?)") opens? the last email$/ do |address|
+  open_last_email_for(address)
+end
+
 #
 # Inspect the Email Contents
 #
 
-Then /^(?:I|they) should see "([^"]*?)" in the email subject$/ do |text|
+Then /^(?:|the .+ )should see "([^"]*?)" in the email subject$/ do |text|
   expect(current_email).to have_subject(text)
 end
 
-Then /^(?:I|they) should see \/([^"]*?)\/ in the email subject$/ do |text|
+Then /^(?:|the .+ )should see \/([^"]*?)\/ in the email subject$/ do |text|
   expect(current_email).to have_subject(Regexp.new(text))
 end
 
-Then /^(?:I|they) should not see "([^"]*?)" in the email subject$/ do |text|
+Then /^(?:|the .+ )should not see "([^"]*?)" in the email subject$/ do |text|
   expect(current_email).not_to have_subject(text)
 end
 
-Then /^(?:I|they) should not see \/([^"]*?)\/ in the email subject$/ do |text|
+Then /^(?:|the .+ )should not see \/([^"]*?)\/ in the email subject$/ do |text|
   expect(current_email).not_to have_subject(Regexp.new(text))
 end
 
-Then /^(?:I|they) should see "([^"]*?)" in the email body$/ do |text|
+Then /^(?:|the .+ )should see "([^"]*?)" in the email body$/ do |text|
   expect(current_email.default_part_body.to_s).to include(text)
 end
 
-Then /^(?:I|they) should not see "([^"]*?)" in the email body$/ do |text|
+Then /^(?:|the .+ )should not see "([^"]*?)" in the email body$/ do |text|
   expect(current_email.default_part_body.to_s).not_to include(text)
 end
 
-Then /^(?:I|they) should see \/([^"]*?)\/ in the email body$/ do |text|
+Then /^(?:|the .+ )should see \/([^"]*?)\/ in the email body$/ do |text|
   expect(current_email.default_part_body.to_s).to match Regexp.new(text)
 end
 
-Then /^(?:I|they) should not see \/([^"]*?)\/ in the email body$/ do |text|
+Then /^(?:|the .+ )should not see \/([^"]*?)\/ in the email body$/ do |text|
   expect(current_email.default_part_body.to_s).not_to match Regexp.new(text)
 end
 
-Then /^(?:I|they) should see the email delivered from "([^"]*?)"$/ do |text|
+Then /^(?:|the .+ )should see the email delivered from "([^"]*?)"$/ do |text|
   expect(current_email).to be_delivered_from(text)
 end
 
-Then /^(?:I|they) should see the email reply to "([^"]*?)"$/ do |text|
+Then /^(?:|the .+ )should see the email reply to "([^"]*?)"$/ do |text|
   expect(current_email).to have_reply_to(text)
 end
 
-Then /^(?:I|they) should see "([^\"]*)" in the email "([^"]*?)" header$/ do |text, name|
+Then /^(?:|the .+ )should see "([^\"]*)" in the email "([^"]*?)" header$/ do |text, name|
   expect(current_email).to have_header(name, text)
 end
 
-Then /^(?:I|they) should see \/([^\"]*)\/ in the email "([^"]*?)" header$/ do |text, name|
+Then /^(?:|the .+ )should see \/([^\"]*)\/ in the email "([^"]*?)" header$/ do |text, name|
   expect(current_email).to have_header(name, Regexp.new(text))
 end
 
@@ -149,11 +162,11 @@ Then /^I should see it is a multi\-part email$/ do
     expect(current_email).to be_multipart
 end
 
-Then /^(?:I|they) should see "([^"]*?)" in the email html part body$/ do |text|
+Then /^(?:|the .+ )should see "([^"]*?)" in the email html part body$/ do |text|
     expect(current_email.html_part.body.to_s).to include(text)
 end
 
-Then /^(?:I|they) should see "([^"]*?)" in the email text part body$/ do |text|
+Then /^(?:|the .+ )should see "([^"]*?)" in the email text part body$/ do |text|
     expect(current_email.text_part.body.to_s).to include(text)
 end
 
@@ -161,7 +174,7 @@ end
 # Inspect the Email Attachments
 #
 
-Then /^(?:I|they) should see (an|no|\d+) attachments? with the email$/ do |amount|
+Then /^(?:|the .+ )should see (an|no|\d+) attachments? with the email$/ do |amount|
   expect(current_email_attachments.size).to eql parse_email_count(amount)
 end
 
@@ -199,8 +212,12 @@ When /^(?:I|they|"([^"]*?)") follows? "([^"]*?)" in the email$/ do |address, lin
   visit_in_email(link, address)
 end
 
-When /^(?:I|they) click the first link in the email$/ do
+When /^(?:|the .+ )clicks the first link in the email$/ do
   click_first_link_in_email
+end
+
+When /^(?:|the .+ )clicks the link in the email - "([^"]*?)"$/ do |regex|
+  click_email_link_matching(/#{regex}/)
 end
 
 #

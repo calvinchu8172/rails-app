@@ -1,6 +1,5 @@
 #= require jquery2
 #= require jquery_ujs
-#= require turbolinks
 #= require js-cookie/src/js.cookie
 #= require moment/min/moment.min
 #= require moment-timezone/builds/moment-timezone-with-data.min

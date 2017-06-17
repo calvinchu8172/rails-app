@@ -50,7 +50,7 @@ Rails.application.configure do
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
-  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # for bullet
   config.after_initialize do
@@ -64,7 +64,4 @@ Rails.application.configure do
 
   # Set the logging destination(s)
   config.log_to = %w[stdout file]
-
-  # use letter_opener preview sent email
-  config.action_mailer.delivery_method = :letter_opener
 end

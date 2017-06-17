@@ -14,8 +14,10 @@ module Logging::Layouts
     def format_obj(obj)
       case obj
       when Exception
-        h = { :class   => obj.class.name,
-              :message => obj.message }
+        h = { class: obj.class.name, message: obj.message }
+        if obj.respond_to? :response
+          h[:response] = JSON.parse(obj.response) rescue obj.response
+        end
         h[:backtrace] = obj.backtrace if @backtrace && !obj.backtrace.nil?
         h
       when Time
@@ -43,34 +45,24 @@ module ActionController
       payload[:session][:session_id] = session[:session_id]  if session[:session_id].present?
       payload[:session][:csrf_token] = session[:_csrf_token] if session[:_csrf_token].present?
       # params
+      params_hash = if params.is_a? ActionController::Parameters
+        params.to_unsafe_h
+      elsif params.is_a? ActiveSupport::HashWithIndifferentAccess
+        params.to_h
+      else
+        params
+      end
       parameter_filter = ActionDispatch::Http::ParameterFilter.new([:password])
-      filtered_params  = parameter_filter.filter(params).symbolize_keys
+      filtered_params  = parameter_filter.filter(params_hash).symbolize_keys
       payload[:params] = filtered_params.except(:action, :controller, :utf8)
-    end
-  end
-end
-
-# override lograge data with more info
-module Lograge
-  class RequestLogSubscriber < ActiveSupport::LogSubscriber
-    def initial_data(payload)
-      data = {}
-      data[:request_id] = payload[:request_id]
-      data[:remote_ip]  = payload[:remote_ip]
-      data[:method]     = payload[:method]
-      data[:path]       = extract_path(payload)
-      data[:headers]    = payload[:headers] if payload[:headers].present?
-      data[:session]    = payload[:session] if payload[:session].present?
-      data[:params]     = payload[:params]
-      data
     end
   end
 end
 
 module ActionDispatch
   class DebugExceptions
-    def log_error(env, wrapper)
-      logger = logger(env)
+    def log_error(request, wrapper)
+      logger = logger(request)
       return unless logger
 
       exception = wrapper.exception
