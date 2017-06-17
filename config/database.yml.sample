@@ -16,7 +16,7 @@ test:
   username: root
   password:
   host: mysql
-  database: ppush-console_test
+  database: rails-app_test
 production:
   adapter: sqlite3
   pool: 5
