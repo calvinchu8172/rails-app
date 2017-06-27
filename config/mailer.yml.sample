@@ -1,6 +1,6 @@
 ---
 development:
-  delivery_method: letter_opener
+  delivery_method: :letter_opener
   smtp_settings:
     address: email-smtp.us-east-1.amazonaws.com
     port: 587
@@ -8,13 +8,13 @@ development:
     password:
     authentication: login
     enable_starttls_auto: true
-  default:
-    from: myzyxel-dev-team@ecoworkinc.com
+  default_options:
+    from: RailsApp <rails-app@example.com>
   default_url_options:
     host:
     protocol:
 test:
-  delivery_method: smtp
+  delivery_method: :test
   smtp_settings:
     address: email-smtp.us-east-1.amazonaws.com
     port: 587
@@ -22,13 +22,13 @@ test:
     password:
     authentication: login
     enable_starttls_auto: true
-  default:
-    from: myzyxel-dev-team@ecoworkinc.com
+  default_options:
+    from: RailsApp <rails-app@example.com>
   default_url_options:
     host: localhost
     protocol:
 production:
-  delivery_method: smtp
+  delivery_method: :smtp
   smtp_settings:
     address: email-smtp.us-east-1.amazonaws.com
     port: 587
@@ -36,8 +36,8 @@ production:
     password:
     authentication: login
     enable_starttls_auto: true
-  default:
-    from: myzyxel-dev-team@ecoworkinc.com
+  default_options:
+    from: RailsApp <rails-app@example.com>
   default_url_options:
     host:
     protocol:

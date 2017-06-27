@@ -36,7 +36,7 @@ module FontAwesome
         classes.concat Array(options.delete(:class))
         text = options.delete(:text)
         right_icon = options.delete(:right)
-        icon = content_tag(:i, nil, options.merge(:class => classes))
+        icon = content_tag(:i, nil, options.merge(class: classes))
         Private.icon_join(icon, text, right_icon)
       end
 
@@ -73,7 +73,7 @@ module FontAwesome
         icons.reverse! if options.delete(:reverse)
         text = options.delete(:text)
         right_icon = options.delete(:right)
-        stacked_icon = content_tag(:span, safe_join(icons), options.merge(:class => classes))
+        stacked_icon = content_tag(:span, safe_join(icons), options.merge(class: classes))
         Private.icon_join(stacked_icon, text, right_icon)
       end
 

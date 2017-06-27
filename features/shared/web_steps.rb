@@ -79,7 +79,6 @@ end
 When /^(?:|the .+ )clicks "([^"]*)" icon(?: from row "([^"]*)")?$/ do |link, index|
   wait_for_ajax
   link = link.underscore
-
   if index.present?
     index = index.to_i - 1
     icons = all(".fa-#{link}")
@@ -91,12 +90,7 @@ end
 
 When /^(?:|the .+ )fills in "([^"]*)" with "([^"]*)"(?: within "([^"]*)")?$/ do |field, value, selector_name|
   with_scope(to_selector(selector_name)) do
-    case field
-    when '密碼'
-      find(:css, "input[id$='password']:not([id$='current_password'])").set(value)
-    else
-      fill_in(field_id(field), with: value)
-    end
+    fill_in(field_id(field), with: value, match: :prefer_exact)
   end
 end
 
