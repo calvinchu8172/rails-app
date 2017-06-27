@@ -9,7 +9,7 @@ development:
     authentication: login
     enable_starttls_auto: true
   default_options:
-    from: myZyxel-local <myzyxel-dev-team@ecoworkinc.com>
+    from: RailsApp <rails-app@example.com>
   default_url_options:
     host:
     protocol:
@@ -23,7 +23,7 @@ test:
     authentication: login
     enable_starttls_auto: true
   default_options:
-    from: myZyxel-local <myzyxel-dev-team@ecoworkinc.com>
+    from: RailsApp <rails-app@example.com>
   default_url_options:
     host: localhost
     protocol:
@@ -37,7 +37,7 @@ production:
     authentication: login
     enable_starttls_auto: true
   default_options:
-    from: myZyxel-local <myzyxel-dev-team@ecoworkinc.com>
+    from: RailsApp <rails-app@example.com>
   default_url_options:
     host:
     protocol:
