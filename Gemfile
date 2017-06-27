@@ -4,14 +4,14 @@ source 'https://rubygems.org'
 # - Rails Default - #
 # ----------------- #
 
-gem 'rails', '5.0.3'
+gem 'rails', '5.0.4'
 gem 'rails-i18n', '5.0.4'
 gem 'puma', '~> 3.0', '3.9.1'
 gem 'sass-rails', '~> 5.0', '5.0.6'
 gem 'uglifier', '>= 1.3.0', '3.2.0'
-gem 'coffee-rails', '~> 4.2', '4.2.1'
+gem 'coffee-rails', '~> 4.2', '4.2.2'
 gem 'jquery-rails', '4.3.1'
-gem 'jbuilder', '~> 2.5', '2.6.4'
+gem 'jbuilder', '~> 2.5', '2.7.0'
 
 group :development, :test do
   gem 'byebug', '9.0.6', platform: :mri
@@ -23,8 +23,6 @@ group :development do
   gem 'spring', '2.0.2'
   gem 'spring-watcher-listen', '~> 2.0.0', '2.0.1'
 end
-
-gem 'tzinfo-data', '1.2017.2'
 
 # ------------ #
 # - Database - #
@@ -38,7 +36,7 @@ gem 'bullet', '5.5.1', group: :development
 # - Model - #
 # --------- #
 
-gem 'activerecord-import', '0.18.3'
+gem 'activerecord-import', '0.19.0'
 gem 'default_value_for', '3.0.2'
 gem 'strip_attributes', '1.8.0'
 gem 'validate_url', '1.0.2'
@@ -47,16 +45,17 @@ gem 'validate_url', '1.0.2'
 # - BDD Test - #
 # ------------ #
 
+# Use Cucumber test framwork
 group :test do
   gem 'cucumber-rails', '1.5.0', require: false
   gem 'database_cleaner', '1.6.1'
   gem 'email_spec', '2.1.1'
   gem 'factory_girl_rails', '4.8.0'
   gem 'json_spec', '1.1.5'
-  gem 'puffing-billy', '0.9.1'
+  gem 'puffing-billy', '0.10.0'
   gem 'rack_session_access', '0.1.1'
-  gem 'rspec-rails', '3.5.2'
-  gem 'selenium-webdriver', '3.4.2'
+  gem 'rspec-rails', '3.6.0'
+  gem 'selenium-webdriver', '3.4.3'
   gem 'simplecov', '0.14.1', require: false
   gem 'timecop', '0.8.1'
   gem 'webmock', '3.0.1'
@@ -73,7 +72,7 @@ group :development, :test do
   gem 'pry-rails', '0.3.6'
   gem 'pry-remote', '0.1.8'
   # 優化 console 顯示
-  gem 'awesome_print', '1.7.0', require: false
+  gem 'awesome_print', '1.8.0', require: false
   gem 'hirb', '0.7.3', require: false
   gem 'hirb-unicode', '0.0.5', require: false
 end
@@ -82,7 +81,7 @@ end
 group :development do
   gem 'better_errors', '2.1.1'
   gem 'binding_of_caller', '0.7.2'
-  gem 'meta_request', '0.4.0'
+  gem 'meta_request', '0.4.3'
 end
 
 # ---------- #
