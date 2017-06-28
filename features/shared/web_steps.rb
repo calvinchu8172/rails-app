@@ -9,25 +9,8 @@ end
 
 World WithinHelpers
 
-Given /^(?:|the .+ )is at (.+)page(?:| - "([^"]*)")$/ do |page_name, expect_path|
-  visit path_to(page_name)
-  if expect_path
-    current_path = URI.parse(current_url).path
-    current_query = URI.parse(current_url).query
-    if current_query.blank?
-      expect(current_path).to eql expect_path
-    else
-      expect("#{current_path}?#{current_query}").to eql expect_path
-    end
-  end
-end
-
-When /^(?:|the .+ )goes to (.+)page(?:| - "([^"]*)")$/ do |page_name, expect_path|
-  if expect_path
-    visit expect_path
-  else
-    visit path_to(page_name)
-  end
+When /^(?:|the .+ )goes to page - "([^"]*)"$/ do |expect_path|
+  visit expect_path
   sleep 1
 end
 
@@ -147,13 +130,13 @@ end
 When /^(?:|the .+ )checks "([^"]*)"(?: within "([^"]*)")?$/ do |field, selector_name|
   wait_for_ajax
   with_scope(to_selector(selector_name)) do
-    check(field_id(field))
+    check(field_id(field), visible: false)
   end
 end
 
 When /^(?:|the .+ )unchecks "([^"]*)"(?: within "([^"]*)")?$/ do |field, selector_name|
   with_scope(to_selector(selector_name)) do
-    uncheck(field_id(field))
+    uncheck(field_id(field), visible: false)
   end
 end
 
@@ -276,29 +259,34 @@ Then /^the "([^"]*)" checkbox(?: within "([^"]*)")? should not be checked$/ do |
   end
 end
 
-Then /^(?:|the .+ )should be at (.+)page(?:| - "([^"]*)")$/ do |page_name, expect_path|
+Then /^(?:|the .+ )should be at page - "(.*?)"$/ do |expect_path|
   wait_for_ajax
   current_path  = URI.parse(current_url).path
   current_query = URI.parse(current_url).query
 
   if current_query.blank?
-    if expect_path
-      expect(current_path).to eql expect_path
-    else
-      expect(current_path).to eql path_to(page_name)
-    end
+    expect(current_path).to eql expect_path
   else
     current_query = URI.unescape(current_query)
-    if expect_path
-      expect("#{current_path}?#{current_query}").to eq expect_path
-    else
-      expect("#{current_path}?#{current_query}").to eq path_to(page_name)
-    end
+    expect("#{current_path}?#{current_query}").to eq expect_path
   end
 end
 
-Then /^(?:|the .+ )should be at page - "(.*?)"$/ do |expect_url|
+Then /^(?:|the .+ )should be at external page - "(.*?)"$/ do |expect_url|
   expect(current_url).to eq expect_url
+end
+
+Then /^(?:|the .+ )should see a new browser window at page - "(.*?)"$/ do |expect_path|
+  page.within_window windows.last do
+    current_path  = URI.parse(current_url).path
+    current_query = URI.parse(current_url).query
+    if current_query.blank?
+      expect(current_path).to eql expect_path
+    else
+      current_query = URI.unescape(current_query)
+      expect("#{current_path}?#{current_query}").to eq expect_path
+    end
+  end
 end
 
 Then /^(?:|the .+ )should have the following query string:$/ do |expected_pairs|
@@ -344,7 +332,7 @@ Then /^(?:|the .+ )should not see a notification \- "(.*?)"$/ do |text|
   expect(page).to have_no_content(text)
 end
 
-When /^(?:|the .+ )close the notification$/ do
+And /^(?:|the .+ )close the notification$/ do
   find('.ui-dialog-titlebar-close').click
 end
 
