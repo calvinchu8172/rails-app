@@ -1,9 +1,9 @@
-Feature: PrivatePush Console - SM-01 - 008 - Change Password
+Feature: SM-01 - 08 - Change Password
 
   Background:
     Given the super admin has already signed up
 
-  Scenario: [SM-01-008-01]
+  Scenario: [SM-01-08-01]
     1. 修改密碼
     2. 使用新密碼登入
     # 1

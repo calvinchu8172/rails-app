@@ -1,11 +1,11 @@
 @timecop
-Feature: PrivatePush Console - SM-01 - 005 - Create User
+Feature: SM-01 - 05 - Create User
 
   Background:
     Given the super admin has already signed up
 
   @javascript
-  Scenario: [SM-01-005-01]
+  Scenario: [SM-01-05-01]
     1. 新增人員帳號
     2. 重寄認證信
     3. 人員帳號進行認證及設定密碼

@@ -1,6 +1,6 @@
-Feature: PrivatePush Console - SM-01 - 001 - Create Root Account
+Feature: SM-01 - 01 - Create Root Account
 
-  Scenario: [SM-01-001-01]
+  Scenario: [SM-01-01-01]
     1. 註冊超級管理員
     2. 重發認證信
     # 1

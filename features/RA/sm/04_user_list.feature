@@ -1,9 +1,9 @@
-Feature: PrivatePush Console - SM-01 - 004 - User List
+Feature: SM-01 - 04 - User List
 
   Background:
     Given the super admin has already signed up
 
-  Scenario: [SM-01-004-01]
+  Scenario: [SM-01-04-01]
     查看人員帳號列表
     When the user goes to the homepage
     Then the user should be at sign in page - "/users/sign_in"

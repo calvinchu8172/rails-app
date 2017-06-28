@@ -1,5 +1,5 @@
 @timecop
-Feature: PrivatePush Console - SM-01 - 007 - Lock Unlock User
+Feature: SM-01 - 07 - Lock Unlock User
 
   Background:
     Given Time now is "2017-01-01 12:00:00"
@@ -7,7 +7,7 @@ Feature: PrivatePush Console - SM-01 - 007 - Lock Unlock User
     Given the user manager has already been created by super admin
 
   @javascript
-  Scenario: [SM-01-007-01]
+  Scenario: [SM-01-07-01]
     1. 鎖定人員帳號
     2. 解鎖人員帳號
     # 1

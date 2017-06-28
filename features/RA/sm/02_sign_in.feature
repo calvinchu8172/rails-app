@@ -1,9 +1,9 @@
-Feature: PrivatePush Console - SM-01 - 002 - Sign In
+Feature: SM-01 - 02 - Sign In
 
   Background:
     Given the super admin has already signed up
 
-  Scenario: [SM-01-002-01]
+  Scenario: [SM-01-02-01]
     1. 管理人員登入
     2. 管理人員登出
     # 1

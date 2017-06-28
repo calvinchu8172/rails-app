@@ -1,9 +1,9 @@
-Feature: PrivatePush Console - SM-01 - 003 - Forgot Password
+Feature: SM-01 - 03 - Forgot Password
 
   Background:
     Given the super admin has already signed up
 
-  Scenario: [SM-01-003-01]
+  Scenario: [SM-01-03-01]
     忘記密碼
     When the user goes to the homepage
     Then the user should be at sign in page - "/users/sign_in"
