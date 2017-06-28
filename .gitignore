@@ -20,6 +20,7 @@
 /config/*.yml
 !/config/cucumber.yml
 !/config/secrets.yml
+!/config/rails_best_practices.yml
 
 # Ignore local rvm ruby version and gemset
 /.ruby-gemset

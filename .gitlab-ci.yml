@@ -1,7 +1,18 @@
-image: 683422241496.dkr.ecr.us-east-1.amazonaws.com/cd-rails-base:latest
+image: 683422241496.dkr.ecr.us-east-1.amazonaws.com/rails-cd-base-chrome:latest
 
 stages:
   - test
+  - release
+
+rails_best_practice:
+  tags:
+    - ruby
+  stage: test
+  script:
+    - bundle install --jobs $(nproc) --path=/cache/bundler
+    - bundle exec rails_best_practices .
+  only:
+    - /^feature.*$/
 
 cucumber:
   tags:
@@ -12,16 +23,52 @@ cucumber:
   script:
     - rename 's/.sample//' config/*.sample
     - bundle install --jobs $(nproc) --path=/cache/bundler
-    - rake bower:install[--allow-root] bower:resolve
-    - mysqladmin -uroot -h mysql create ppush-console_test
-    - RAILS_ENV=test bundle exec rake db:migrate db:seed
+    - bin/rails bower:install[--allow-root] bower:resolve
+    - mysqladmin -uroot -h mysql create rails-app_test
+    - RAILS_ENV=test bin/rails db:migrate db:seed
     - mkdir test-plans
-    - xvfb-run -a --server-args="-screen 0 1680x1000x24" bundle exec cucumber -f EcoworkFormatter -o test-plans/ppush-console.html
-    - yard config load_plugins true
-    - yardoc 'app/**/*.rb' 'features/**/*.feature'
+    - xvfb-run -a --server-args="-screen 0 1280x1000x24" bin/cucumber -f EcoworkFormatter -o test-plans/rails-app.html
+    - bundle exec yard config load_plugins true
+    - bundle exec yardoc 'app/**/*.rb' 'features/**/*.feature'
   artifacts:
     paths:
       - test-plans/
       - doc
   only:
     - develop
+    - /^parallel.*$/
+
+release:alpha-beta:
+  tags:
+    - ruby
+  stage: release
+  script:
+    - docker pull 683422241496.dkr.ecr.us-east-1.amazonaws.com/rails-passenger:latest
+    - docker pull $AWS_ECR_REPOSITORY:develop
+    - docker build -t $AWS_ECR_REPOSITORY:$CI_BUILD_REF_NAME .
+    - docker push $AWS_ECR_REPOSITORY:$CI_BUILD_REF_NAME
+  only:
+    - develop
+    - master
+
+release:stable:
+  tags:
+    - ruby
+  stage: release
+  script:
+    - docker pull $AWS_ECR_REPOSITORY:master
+    - docker build -t $AWS_ECR_REPOSITORY:$CI_BUILD_TAG .
+    - docker push $AWS_ECR_REPOSITORY:$CI_BUILD_TAG
+  only:
+    - tags
+
+release:build:
+  tags:
+    - ruby
+  stage: release
+  script:
+    - docker pull 683422241496.dkr.ecr.us-east-1.amazonaws.com/rails-passenger:latest
+    - docker build -t $AWS_ECR_REPOSITORY:build .
+    - docker push $AWS_ECR_REPOSITORY:build
+  only:
+    - /^build.*$/
